@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 17, 2018 lúc 05:48 PM
+-- Thời gian đã tạo: Th10 20, 2018 lúc 05:37 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.1
 
@@ -111,11 +111,33 @@ INSERT INTO `tbl_detai` (`pk_madetai_id`, `fk_user_id`, `fk_user_hoi_dong`, `c_t
 --
 
 CREATE TABLE `tbl_detai_phieucham` (
+  `pk_detai_phieucham_id` int(11) NOT NULL,
   `fk_madetai_id` int(11) NOT NULL,
-  `fk_khoanmucdiem_id` int(11) NOT NULL,
-  `diemToiDa` int(11) NOT NULL,
-  `diemDanhGia` int(11) NOT NULL
+  `ghi_chu` text NOT NULL,
+  `y_kien` text NOT NULL,
+  `xep_loai` text NOT NULL,
+  `ngay_hop` date NOT NULL,
+  `dia_diem` text NOT NULL,
+  `detaidunghan_quahan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_detai_phieucham`
+--
+
+INSERT INTO `tbl_detai_phieucham` (`pk_detai_phieucham_id`, `fk_madetai_id`, `ghi_chu`, `y_kien`, `xep_loai`, `ngay_hop`, `dia_diem`, `detaidunghan_quahan`) VALUES
+(1, 0, 'Ghi chú 1', 'Ý kiến 1', '', '0000-00-00', '', 0),
+(2, 0, '', '', '', '0000-00-00', '', 0),
+(3, 0, '', '', '', '0000-00-00', '', 0),
+(4, 0, '', '', '', '0000-00-00', '', 0),
+(5, 0, '', '', '', '0000-00-00', '', 0),
+(6, 0, '', '', '', '0000-00-00', '', 0),
+(7, 0, '', '', '', '0000-00-00', '', 0),
+(8, 0, '', '', '', '0000-00-00', '', 0),
+(9, 0, '', '', '', '0000-00-00', '', 0),
+(10, 0, '', '', '', '0000-00-00', '', 0),
+(11, 0, '', '', '', '0000-00-00', '', 0),
+(12, 0, '', '', '', '0000-00-00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -170,12 +192,11 @@ INSERT INTO `tbl_detai_user` (`fk_madetai_id`, `fk_user_id`) VALUES
 CREATE TABLE `tbl_diem_phieucham` (
   `PointId` int(11) NOT NULL,
   `fk_user_id` int(11) NOT NULL,
+  `fk_detai_phieucham_id` int(11) NOT NULL,
   `fk_khoanmucdiem_id` int(11) NOT NULL,
   `diem_chu_tich` float NOT NULL,
   `diem_phan_bien_1` float NOT NULL,
-  `diem_phan_bien_2` float NOT NULL,
-  `ghi_chu` text NOT NULL,
-  `xep_loai` float NOT NULL
+  `diem_phan_bien_2` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -214,17 +235,20 @@ INSERT INTO `tbl_giaovien` (`pk_magiaovien_id`, `fk_user_id`, `fk_mabomon_id`, `
 CREATE TABLE `tbl_hoidong` (
   `pk_hoidong_id` int(11) NOT NULL,
   `c_tenhoidong` varchar(1000) NOT NULL,
-  `fk_madetai_id` int(11) NOT NULL
+  `fk_madetai_id` int(11) NOT NULL,
+  `c_ngaybaove` date NOT NULL,
+  `c_thoigian` time NOT NULL,
+  `c_diadiem` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_hoidong`
 --
 
-INSERT INTO `tbl_hoidong` (`pk_hoidong_id`, `c_tenhoidong`, `fk_madetai_id`) VALUES
-(8, 'Hội đồng 123', 46),
-(9, 'Hội đồng duyệt đề tài 7777', 44),
-(10, 'Hội đồng duyệt đề tài quản lý nhân sự', 49);
+INSERT INTO `tbl_hoidong` (`pk_hoidong_id`, `c_tenhoidong`, `fk_madetai_id`, `c_ngaybaove`, `c_thoigian`, `c_diadiem`) VALUES
+(9, 'Hội đồng duyệt đề tài 7777', 44, '2018-11-24', '08:30:00', 'Hà Nội'),
+(10, 'Hội đồng duyệt đề tài quản lý nhân sự', 49, '2018-11-23', '09:00:00', 'Hà Nội'),
+(11, 'Hội đồng duyệt đề tài 3333', 46, '2018-11-02', '13:30:00', 'Hà Nội');
 
 -- --------------------------------------------------------
 
@@ -235,15 +259,19 @@ INSERT INTO `tbl_hoidong` (`pk_hoidong_id`, `c_tenhoidong`, `fk_madetai_id`) VAL
 CREATE TABLE `tbl_hoidongnghiemthu` (
   `pk_hoidongnghiemthu_id` int(11) NOT NULL,
   `c_tenhoidong` varchar(1000) NOT NULL,
-  `fk_madetai_id` int(11) NOT NULL
+  `fk_madetai_id` int(11) NOT NULL,
+  `c_ngaybaove` date NOT NULL,
+  `c_thoigian` time NOT NULL,
+  `c_diadiem` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_hoidongnghiemthu`
 --
 
-INSERT INTO `tbl_hoidongnghiemthu` (`pk_hoidongnghiemthu_id`, `c_tenhoidong`, `fk_madetai_id`) VALUES
-(3, 'Hội đồng 1', 41);
+INSERT INTO `tbl_hoidongnghiemthu` (`pk_hoidongnghiemthu_id`, `c_tenhoidong`, `fk_madetai_id`, `c_ngaybaove`, `c_thoigian`, `c_diadiem`) VALUES
+(4, 'Hội đồng nghiệm thu đề tài 9999', 41, '2018-11-15', '09:30:00', 'Hà Nội'),
+(5, 'Hội đồng nghiệm thu đề tài 888', 42, '2018-11-17', '09:30:00', 'Hà Nội');
 
 -- --------------------------------------------------------
 
@@ -292,7 +320,9 @@ INSERT INTO `tbl_hoidong_detai` (`pk_hoidong_id`, `fk_nam_id`, `fk_vaitro_id`, `
 (35, 0, 1, 83, 3, 8, 0),
 (39, 0, 3, 87, 1, 0, 3),
 (40, 0, 3, 83, 3, 0, 3),
-(42, 0, 3, 87, 1, 10, 0);
+(42, 0, 3, 87, 1, 10, 0),
+(43, 0, 4, 84, 1, 11, 0),
+(44, 0, 2, 86, 2, 11, 0);
 
 -- --------------------------------------------------------
 
@@ -526,25 +556,23 @@ CREATE TABLE `tbl_phieucham` (
   `pk_khoanmucdiem_id` int(11) NOT NULL,
   `parentId` int(11) NOT NULL,
   `c_tenkhoanmuc` varchar(1000) NOT NULL,
-  `c_diemtoida` float NOT NULL,
-  `c_diemdanhgia` float NOT NULL
+  `c_diemtoida` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_phieucham`
 --
 
-INSERT INTO `tbl_phieucham` (`pk_khoanmucdiem_id`, `parentId`, `c_tenkhoanmuc`, `c_diemtoida`, `c_diemdanhgia`) VALUES
-(2, 0, 'Mức độ hoàn thành so với đăng kí trong Thuyết minh đề tài', 80, 60),
-(3, 0, 'Các kết quả vượt trội (chọn 1 trong 2 tiêu chí)', 15, 10),
-(6, 3, 'con 1 của 2', 10, 1),
-(9, 3, 'mục 1', 5, 4),
-(11, 2, 'mục 1', 3, 4),
-(12, 2, 'dd', 3, 4),
-(13, 0, 'Chất lượng báo cáo tổng kết và báo cáo tóm tắt đề tài', 4, 5),
-(14, 13, 'mục 3', 3, 4),
-(15, 0, 'mục 1', 3, 4),
-(16, 2, 'con 1gg', 3, 4);
+INSERT INTO `tbl_phieucham` (`pk_khoanmucdiem_id`, `parentId`, `c_tenkhoanmuc`, `c_diemtoida`) VALUES
+(2, 0, 'Mức độ hoàn thành so với đăng kí trong Thuyết minh đề tài', 80),
+(3, 0, 'Các kết quả vượt trội (chọn 1 trong 2 tiêu chí)', 15),
+(6, 3, 'Có bài báo đăng tạp chí uy tín trong nước được HĐCD nhà nước công nhận', 10),
+(9, 3, 'Có bài báo khoa học đăng trên tạp chí quốc tế', 15),
+(12, 2, 'Tổng quan tình hình nghiên cứu', 15),
+(13, 0, 'Chất lượng báo cáo tổng kết và báo cáo tóm tắt đề tài', 5),
+(16, 2, 'Mục tiêu/ giải quyết câu hỏi nghiên cứu', 15),
+(20, 2, 'Nội dung nghiên cứu', 40),
+(21, 2, 'Phương pháp nghiên cứu', 10);
 
 -- --------------------------------------------------------
 
@@ -591,14 +619,14 @@ CREATE TABLE `tbl_tiendo` (
 --
 
 INSERT INTO `tbl_tiendo` (`pk_tiendo_id`, `fk_madetai_id`, `fk_user_id`, `fk_mabomon_id`, `c_tungay`, `c_denngay`, `c_noidungtiendo`, `c_hoanthanhtiendo`, `c_ghichu`) VALUES
-(1, 41, 0, 0, '2018-11-17', '2018-11-08', 'xây dựng modull quản lý', '80%', 'no'),
-(2, 42, 0, 0, '2018-11-23', '2018-11-22', 'xây dựng modull quản lý', '80%', ''),
-(3, 42, 0, 0, '2018-11-23', '2018-11-30', 'hoàn thành', '80%', ''),
-(4, 41, 0, 0, '2018-11-15', '2018-11-22', 'xây dựng modull quản lý', '80%', ''),
-(5, 41, 0, 0, '2018-11-23', '2018-11-23', 'xây dựng modull quản lý', '80%', ''),
-(6, 42, 0, 0, '2018-11-15', '2018-11-15', 'xây dựng modull quản lý', '80%', ''),
-(7, 47, 0, 0, '2018-11-16', '2018-11-23', 'xây dựng modull quản lý', '80%', ''),
-(8, 47, 0, 0, '2018-11-09', '2018-11-04', 'xây dựng modull quản lý', '80%', '');
+(1, 41, 0, 0, '2018-11-17', '2018-11-08', 'xây dựng modull quản lý', '80', 'no'),
+(2, 42, 0, 0, '2018-11-23', '2018-11-22', 'xây dựng modull quản lý', '80', ''),
+(3, 42, 0, 0, '2018-11-23', '2018-11-30', 'hoàn thành', '80', ''),
+(4, 41, 0, 0, '2018-11-15', '2018-11-22', 'xây dựng modull quản lý', '80', ''),
+(5, 41, 0, 0, '2018-11-23', '2018-11-23', 'xây dựng modull quản lý', '80', ''),
+(6, 42, 0, 0, '2018-11-15', '2018-11-15', 'xây dựng modull quản lý', '80', ''),
+(7, 47, 0, 0, '2018-11-16', '2018-11-23', 'xây dựng modull quản lý', '80', ''),
+(8, 47, 0, 0, '2018-11-09', '2018-11-04', 'xây dựng modull quản lý', '80', '');
 
 -- --------------------------------------------------------
 
@@ -633,9 +661,9 @@ INSERT INTO `tbl_user` (`pk_user_id`, `c_fullname`, `fk_mabomon_id`, `c_hocham`,
 (80, 'Đỗ Ngọc Mai', 63, 'không', 'Tiến sĩ', '2018-10-05', 'Hà nội', 985698736, 'giaovienkt@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
 (81, 'Nguyễn Minh Hòa', 64, 'không', 'Tiến sĩ', '2018-11-16', 'Hà nội', 985698736, 'admin@mail.com', '202cb962ac59075b964b07152d234b70', 0),
 (82, 'Trần Văn Đức', 61, 'không', 'Tiến sĩ', '2018-10-31', 'Hà nội', 985698736, 'giaovientin2@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
-(83, 'Nguyễn Văn Tiến', 61, 'không', 'Tiến sĩ', '2018-11-16', 'Hà nội', 985698736, 'giaovientin3@gmail.com', '202cb962ac59075b964b07152d234b70', 3),
+(83, 'Nguyễn Văn Tiến', 61, 'không', 'Tiến sĩ', '2018-11-16', 'Hà nội', 985698736, 'giaovientin3@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
 (84, 'Đỗ Thị Thu Hiền', 63, 'không', 'Tiến sĩ', '2018-11-17', 'Hà nội', 985698736, 'giaovienkt1@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
-(85, 'Đỗ Thị Huế', 63, 'không', 'Tiến sĩ', '2018-11-10', 'Hà nội', 985698736, 'giaovienkt2@gmail.com', '202cb962ac59075b964b07152d234b70', 3),
+(85, 'Đỗ Thị Huế', 63, 'không', 'Tiến sĩ', '2018-11-10', 'Hà nội', 985698736, 'giaovienkt2@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
 (86, 'Ngô Thanh Nga', 59, 'không', 'Tiến sĩ', '2018-11-02', 'Hà nội', 985698736, 'truongbomontoan@gmail.com', '202cb962ac59075b964b07152d234b70', 2),
 (87, 'Đào Quang Vinh', 61, 'không', 'Tiến sĩ', '2018-11-03', 'Hà nội', 985698736, 'giaovientin4@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
 (88, 'Đào Quang Hưng', 63, 'không', 'Tiến sĩ', '2018-11-23', 'Hà nội', 985698736, 'giaovienkt3@gmail.com', '202cb962ac59075b964b07152d234b70', 1),
@@ -659,7 +687,8 @@ CREATE TABLE `tbl_vaitro` (
 INSERT INTO `tbl_vaitro` (`pk_vaitro_id`, `c_vaitro`) VALUES
 (1, 'Thư ký'),
 (2, 'Chủ tịch'),
-(3, 'Phản biện');
+(3, 'Phản biện 1'),
+(4, 'Phản biện 2');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -682,6 +711,12 @@ ALTER TABLE `tbl_category_news`
 --
 ALTER TABLE `tbl_detai`
   ADD PRIMARY KEY (`pk_madetai_id`);
+
+--
+-- Chỉ mục cho bảng `tbl_detai_phieucham`
+--
+ALTER TABLE `tbl_detai_phieucham`
+  ADD PRIMARY KEY (`pk_detai_phieucham_id`);
 
 --
 -- Chỉ mục cho bảng `tbl_diem_phieucham`
@@ -784,6 +819,12 @@ ALTER TABLE `tbl_detai`
   MODIFY `pk_madetai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
+-- AUTO_INCREMENT cho bảng `tbl_detai_phieucham`
+--
+ALTER TABLE `tbl_detai_phieucham`
+  MODIFY `pk_detai_phieucham_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT cho bảng `tbl_diem_phieucham`
 --
 ALTER TABLE `tbl_diem_phieucham`
@@ -799,19 +840,19 @@ ALTER TABLE `tbl_giaovien`
 -- AUTO_INCREMENT cho bảng `tbl_hoidong`
 --
 ALTER TABLE `tbl_hoidong`
-  MODIFY `pk_hoidong_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `pk_hoidong_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_hoidongnghiemthu`
 --
 ALTER TABLE `tbl_hoidongnghiemthu`
-  MODIFY `pk_hoidongnghiemthu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pk_hoidongnghiemthu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_hoidong_detai`
 --
 ALTER TABLE `tbl_hoidong_detai`
-  MODIFY `pk_hoidong_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `pk_hoidong_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_lichbaove`
@@ -835,7 +876,7 @@ ALTER TABLE `tbl_news`
 -- AUTO_INCREMENT cho bảng `tbl_phieucham`
 --
 ALTER TABLE `tbl_phieucham`
-  MODIFY `pk_khoanmucdiem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `pk_khoanmucdiem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_slide`
@@ -859,7 +900,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT cho bảng `tbl_vaitro`
 --
 ALTER TABLE `tbl_vaitro`
-  MODIFY `pk_vaitro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pk_vaitro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
