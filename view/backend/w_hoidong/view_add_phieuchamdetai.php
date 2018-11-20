@@ -306,7 +306,7 @@
     $('select.form-control[name="fk_mabomon_id"]').on('change',function(){
       //console.log($(this).val());
       var href = URL_add_parameter(window.location.href,'fk_mabomon_id',$(this).val());
-      href = URL_add_parameter(window.location.href,'fk_madetai_id',0);
+      href = URL_add_parameter(href,'fk_madetai_id',0);
       window.location.href = href;
     });
     $('select.form-control[name="fk_madetai_id"]').on('change',function(){
