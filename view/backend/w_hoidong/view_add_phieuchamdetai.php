@@ -166,32 +166,32 @@
                   <?php 
                       if($rows->c_diemtoida>0) $tongdiem+=$rows->c_diemtoida;
                    ?>
-                  <tr class="even pointer linePoint">
-                    <td class=" "><?=++$index?></td>
+                  <tr id="ptrId_<?=$rows->pk_khoanmucdiem_id?>" parentTr="<?=$rows->parentId?>" class="even pointer linePoint">
+                    <td class=""><?=++$index?></td>
                     <td class=" " style="font-weight: bold; width: 250px;"><?php echo $rows->c_tenkhoanmuc; ?></td>
                     <td class=" " style="font-weight: bold;"><?=$rows->c_diemtoida?></td>
                     <td class=" " style="font-weight: bold;">
-                      <input type="text" class="diem_chu_tich" value="">
+                      <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_chu_tich" value="" >
                     </td>
                     <td class=" " style="font-weight: bold;">
-                      <input type="text" class="diem_phan_bien_1" value="">
+                      <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_phan_bien_1" value="" >
                     </td>
                     <td class=" " style="font-weight: bold;">
-                      <input type="text" class="diem_phan_bien_2" value="">
-                      <input type="text" name="" class="pk_khoanmucdiem_id" value="<?=$rows1->pk_khoanmucdiem_id?>" hidden>
+                      <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_phan_bien_2" value="" >
+                      <input type="text" name="" class="pk_khoanmucdiem_id" value="<?=$rows->pk_khoanmucdiem_id?>" hidden>
                     </td>
                    
                   </tr>
                   <?php $arr1= $this->model->get_all("select * from tbl_phieucham where parentId={$rows->pk_khoanmucdiem_id} order by pk_khoanmucdiem_id");?>
                   <?php foreach($arr1 as $rows1): ?>
-                  <tr class="even pointer linePoint">
+                  <tr id="ptrId_<?=$rows1->pk_khoanmucdiem_id?>" parentTr="<?=$rows1->parentId?>" class="even pointer linePoint">
                     <td class=" "></td>
                     <td class=" "><?php echo $rows1->c_tenkhoanmuc; ?></td>
                     <td class=" "><?=$rows1->c_diemtoida?></td>
-                    <td class=" "><input type="text" class="diem_chu_tich" value=""></td>
-                    <td class=" "><input type="text" class="diem_phan_bien_1" value=""></td>
+                    <td class=" "><input parent="<?=$rows->pk_khoanmucdiem_id?>" type="text" class="form-control diem_chu_tich" value=""></td>
+                    <td class=" "><input parent="<?=$rows->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_1" value=""></td>
                     <td class=" ">
-                      <input type="text" class="diem_phan_bien_2" value="">
+                      <input parent="<?=$rows->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_2" value="">
                       <input type="text" name="" class="pk_khoanmucdiem_id" value="<?=$rows1->pk_khoanmucdiem_id?>" hidden>
                     </td>
                   </tr>
@@ -208,13 +208,13 @@
                   <label class="control-label col-md-1 col-sm-1 col-xs-12" style="margin-left: 105px;">Tổng 
                   </label>
                   <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 208px;">
-                    <input type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
+                    <input id="tong_diem_chu_tich" type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 120px;">
-                    <input type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
+                    <input id="tong_diem_phan_bien_1" type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 120px;">
-                    <input type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
+                    <input id="tong_diem_phan_bien_2" type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
                   </div>
                 </div>
 
@@ -355,4 +355,82 @@
         }
     });
   }
+</script>
+<script type="text/javascript">
+  $(function(){
+    $('tr[id]').each(function(i,e){
+      var id = parseInt($(this).attr('id').split('_')[1]);
+      var parent = parseInt($(this).attr('parenttr'));
+      if(parent == 0 && $(`tr[parenttr="${id}"]`).length>0){
+        debugger
+        $(this).find('input').attr('readonly','readonly');
+      }
+    });
+  });
+  //Tinh tong diem chu tich
+  $('.diem_chu_tich').on('change',function(){
+    var tong = 0;
+    var parentId = parseInt($(this).attr('parent'));
+    if(parentId > 0){
+      $(`.diem_chu_tich[parent="${parentId}"]`).each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $(`.diem_chu_tich#parent_${parentId}`).val(tong);
+    }
+    tong=0;
+    $('.diem_chu_tich[parent="0"]').each(function(i,e){
+      //console.log(e.value);
+      if(e.value){
+        tong += parseInt(e.value);
+      }
+    });
+    $('#tong_diem_chu_tich').val(tong);
+  });
+  //-----------------------------------
+  $('.diem_phan_bien_1').on('change',function(){
+    var tong = 0;
+    var parentId = parseInt($(this).attr('parent'));
+    if(parentId > 0){
+      $(`.diem_phan_bien_1[parent="${parentId}"]`).each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $(`.diem_phan_bien_1#parent_${parentId}`).val(tong);
+    }
+    tong=0;
+    $('.diem_phan_bien_1[parent="0"]').each(function(i,e){
+      //console.log(e.value);
+      if(e.value){
+        tong += parseInt(e.value);
+      }
+    });
+    $('#tong_diem_phan_bien_1').val(tong);
+  });
+  //-----------------------------------
+  $('.diem_phan_bien_2').on('change',function(){
+    var tong = 0;
+    var parentId = parseInt($(this).attr('parent'));
+    if(parentId > 0){
+      $(`.diem_phan_bien_2[parent="${parentId}"]`).each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $(`.diem_phan_bien_2#parent_${parentId}`).val(tong);
+    }
+    tong=0;
+    $('.diem_phan_bien_2[parent="0"]').each(function(i,e){
+      //console.log(e.value);
+      if(e.value){
+        tong += parseInt(e.value);
+      }
+    });
+    $('#tong_diem_phan_bien_2').val(tong);
+  });
 </script>
