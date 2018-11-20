@@ -1,7 +1,5 @@
   <?php 
-    if(isset($_GET['action']) && $_GET['action']=='test'){
-      print_r($_POST);
-    }
+
   ?>
  <!-- page content -->
 <div class="right_col" role="main">
@@ -30,7 +28,7 @@
           <div class="x_title" >
              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" action="<?php echo $form_action; ?>">
                       <?php 
-                        $arrDt = $this->model->get_all('select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id where dt.c_trangthai=2 ');
+                        $arrDt = $this->model->get_all('select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id where dt.c_trangthai in (2) '.(isset($_GET['fk_mabomon_id'])?" and bm.pk_mabomon_id=".$_GET['fk_mabomon_id']:""));
                       ?>
                        <div class="form-group">
 
@@ -38,11 +36,15 @@
                         </label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
                           <select name="fk_mabomon_id" class="form-control col-md-7 col-xs-12">
-                            <?php 
-                              $bomon = $this->model->get_all("select * from tbl_bomon order by pk_mabomon_id desc");
+                            <?php $bomon = $this->model->get_all("select * from tbl_bomon order by pk_mabomon_id desc");
                               foreach($bomon as $rows):
+                                $fk_mabomon_id="";
+                                if(isset($record->fk_mabomon_id)&&$record->fk_mabomon_id==$rows->pk_mabomon_id ||
+                                    isset($_GET['fk_mabomon_id'])&&$rows->pk_mabomon_id==$_GET['fk_mabomon_id']){
+                                   $fk_mabomon_id="selected";
+                                }
                              ?>
-                            <option <?php if(isset($record->fk_mabomon_id)&&$record->fk_mabomon_id==$rows->pk_mabomon_id): ?> selected <?php endif; ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
+                            <option <?=$fk_mabomon_id?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -51,10 +53,17 @@
                         <div class="col-md-5 col-sm-5 col-xs-12">
                           <select name="fk_madetai_id" class="form-control col-md-7 col-xs-12">
                             <?php 
-                              
+                              $ngay_hop = "";
+                              $thoi_gian = "";
+                              $dia_diem = "";
+                              ///////////////
+                              $de_tai = "";
                               foreach($arrDt as $rows):
+                              if(isset($record->fk_madetai_id)&&$record->fk_madetai_id==$rows->pk_madetai_id){ 
+                                $de_tai="selected"; 
+                              }
                              ?>
-                            <option <?php if(isset($record->fk_madetai_id)&&$record->fk_madetai_id==$rows->pk_madetai_id): ?> selected <?php endif; ?> value="<?php echo $rows->pk_madetai_id; ?>"><?php echo $rows->c_tendetai; ?></option>
+                            <option <?=$de_tai?> value="<?php echo $rows->pk_madetai_id; ?>"><?php echo $rows->c_tendetai; ?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -63,16 +72,26 @@
                       </div>
 
                       <div class="form-group">
+                        <?php 
+                          if(isset($_GET['fk_madetai_id'])){ 
+                            $arc = $this->model->get_a_record("select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id where dt.pk_madetai_id=".$_GET['fk_madetai_id']);
+                            $ngay_hop = explode("-", $arc->c_ngaybaove);
+                            $ngay_hop = $ngay_hop[2]."-".$ngay_hop[1]."-".$ngay_hop[0];
+
+                            $hoi_dong = $this->model->get_all("select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id join tbl_hoidong_detai hddt on hddt.fk_hoidong_id = hd.pk_hoidong_id join tbl_vaitro vt on hddt.fk_vaitro_id = vt.pk_vaitro_id where dt.pk_madetai_id=".$_GET['fk_madetai_id']);
+                          }
+                        ?>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12" >Ngày họp 
                         </label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
-                          <input type="date" name="ngay_hop" value="<?php echo isset($record->ngay_hop)?$record->ngay_hop:""; ?>" required class="form-control col-md-7 col-xs-12"> 
+                          
+                          <input type="text" name="ngay_hop" value="<?=(isset($ngay_hop)?$ngay_hop:"")?>" required class="form-control col-md-7 col-xs-12" readonly> 
                         </div>
 
                          <label class="control-label col-md-1 col-sm-1 col-xs-12" >Địa điểm 
                         </label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
-                          <input type="text" name="dia_diem" value="<?php echo isset($record->dia_diem)?$record->dia_diem:""; ?>" required class="form-control col-md-7 col-xs-12"> 
+                          <input type="text" name="dia_diem" value="<?=(isset($arc)?$arc->c_diadiem:"")?>" required class="form-control col-md-7 col-xs-12" readonly> 
                         </div>
                       </div>
 
@@ -89,10 +108,15 @@
                                     </tr>
                                   </thead>
                                     <tbody>
+                                      <?php 
+                                        if(isset($hoi_dong)){ 
+                                          foreach ($hoi_dong as $item) {
+                                      ?>
                                        <tr class="even pointer">
-                                          <td class=" ">2</td>
-                                          <td class=" ">3</td>      
+                                          <td class=" "><?=$item->c_vaitro?></td>
+                                          <td class=" "><?=$item->c_fullname?></td>      
                                         </tr>
+                                      <?php }} ?>
                                     </tbody>
                                   </table>
                                 </div>
@@ -100,7 +124,7 @@
 
                          <label class="control-label col-md-1 col-sm-1 col-xs-12" >Chủ nhiệm đề tài </label>
                           <div class="col-md-5 col-sm-5 col-xs-12">
-                            <input class="form-control col-md-7 col-xs-12"> 
+                            <input class="form-control col-md-7 col-xs-12" value="<?=(isset($arc)?$arc->c_fullname:"")?>"> 
                           </div>
                       </div>
               </form>
@@ -247,34 +271,45 @@
 </div>
 <!-- /page content -->
 <script type="text/javascript">
-  /*`$(function(){
-    $('#demo-form2').submit(function(e){
-      e.preventDefault();
-      debugger
-       var listPoint = [];
-      $('.linePoint').each(function(){
-        let diem_chu_tich = $(this).find('.diem_chu_tich').val();
-        let diem_phan_bien_1 = $(this).find('.diem_phan_bien_1').val();
-        let diem_phan_bien_2 = $(this).find('.diem_phan_bien_2').val();
-        let pk_khoanmucdiem_id = $(this).find('.pk_khoanmucdiem_id').val();
-        var item = {
-          pk_khoanmucdiem_id: pk_khoanmucdiem_id?pk_khoanmucdiem_id:0,
-          diem_chu_tich : diem_chu_tich?diem_chu_tich:0,
-          diem_phan_bien_1 : diem_phan_bien_1?diem_phan_bien_1:0,
-          diem_phan_bien_2 : diem_phan_bien_2?diem_phan_bien_2:0
-        };
-        listPoint.push(item);
-      });
-      var objReturn = {
-        ghiChu : $('#ghiChu').val(),
-        yKien : $('#yKien').val(),
-        listPoint : listPoint
-      }
-      console.log(objReturn);
+  function URL_add_parameter(url, param, value){
+    var hash       = {};
+    var parser     = document.createElement('a');
+
+    parser.href    = url;
+
+    var parameters = parser.search.split(/\?|&/);
+
+    for(var i=0; i < parameters.length; i++) {
+        if(!parameters[i])
+            continue;
+
+        var ary      = parameters[i].split('=');
+        hash[ary[0]] = ary[1];
+    }
+
+    hash[param] = value;
+
+    var list = [];  
+    Object.keys(hash).forEach(function (key) {
+        list.push(key + '=' + hash[key]);
     });
-  });*/
+
+    parser.search = '?' + list.join('&');
+    return parser.href;
+  }
+
+  $(function(){
+    $('select.form-control[name="fk_mabomon_id"]').on('change',function(){
+      //console.log($(this).val());
+      window.location.href = URL_add_parameter(window.location.href,'fk_mabomon_id',$(this).val());
+    });
+    $('select.form-control[name="fk_madetai_id"]').on('change',function(){
+      //console.log($(this).val());
+      window.location.href = URL_add_parameter(window.location.href,'fk_madetai_id',$(this).val());
+    });
+  });
+
   function submitForm(){
-    debugger
     var listPoint = [];
     $('.linePoint').each(function(){
 
