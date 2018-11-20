@@ -28,7 +28,7 @@
           <div class="x_title" >
              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" action="<?php echo $form_action; ?>">
                       <?php 
-                        $arrDt = $this->model->get_all('select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id where dt.c_trangthai in (1,2) '.(isset($_GET['fk_mabomon_id'])?" and bm.pk_mabomon_id=".$_GET['fk_mabomon_id']:""));
+                        $arrDt = $this->model->get_all('select * from tbl_detai dt join tbl_hoidongnghiemthu hd on hd.fk_madetai_id = dt.pk_madetai_id join tbl_hoidong_detai hddt on hddt.fk_hoidongnghiemthu_id = hd.pk_hoidongnghiemthu_id join tbl_user u on u.pk_user_id = dt.fk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id where dt.c_trangthai in (2) and hddt.fk_user_id ='.$_SESSION['SS_USER']->pk_user_id.(isset($_GET['fk_mabomon_id'])?" and bm.pk_mabomon_id=".$_GET['fk_mabomon_id']:""));
                       ?>
                        <div class="form-group">
 
@@ -52,6 +52,7 @@
                         <label class="control-label col-md-1 col-sm-1 col-xs-12">Đề tài</label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
                           <select name="fk_madetai_id" class="form-control col-md-7 col-xs-12">
+                            <option value="0">Chọn</option>
                             <?php 
                               $ngay_hop = "";
                               $thoi_gian = "";
@@ -59,7 +60,8 @@
                               ///////////////
                               $de_tai = "";
                               foreach($arrDt as $rows):
-                              if(isset($record->fk_madetai_id)&&$record->fk_madetai_id==$rows->pk_madetai_id){ 
+                              if(isset($record->fk_madetai_id)&&$record->fk_madetai_id==$rows->pk_madetai_id ||
+                                  isset($_GET['fk_madetai_id'])&&$rows->fk_madetai_id==$_GET['fk_madetai_id']){ 
                                 $de_tai="selected"; 
                               }
                              ?>
@@ -74,11 +76,13 @@
                       <div class="form-group">
                         <?php 
                           if(isset($_GET['fk_madetai_id'])){ 
-                            $arc = $this->model->get_a_record("select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id where dt.pk_madetai_id=".$_GET['fk_madetai_id']);
-                            $ngay_hop = explode("-", $arc->c_ngaybaove);
-                            $ngay_hop = $ngay_hop[2]."-".$ngay_hop[1]."-".$ngay_hop[0];
+                            $arc = $this->model->get_a_record("select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id join tbl_hoidongnghiemthu hd on hd.fk_madetai_id = dt.pk_madetai_id where dt.pk_madetai_id=".$_GET['fk_madetai_id']);
+                            if(isset($arc)){
+                              $ngay_hop = explode("-", $arc->c_ngaybaove);
+                              $ngay_hop = $ngay_hop[2]."-".$ngay_hop[1]."-".$ngay_hop[0];
+                            }
 
-                            $hoi_dong = $this->model->get_all("select * from tbl_detai dt join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id join tbl_hoidong_detai hddt on hddt.fk_hoidong_id = hd.pk_hoidong_id join tbl_vaitro vt on hddt.fk_vaitro_id = vt.pk_vaitro_id join tbl_user u on hddt.fk_user_id = u.pk_user_id where dt.pk_madetai_id=".$_GET['fk_madetai_id']);
+                            $hoi_dong = $this->model->get_all("select * from tbl_detai dt join tbl_hoidongnghiemthu hd on hd.fk_madetai_id = dt.pk_madetai_id join tbl_hoidong_detai hddt on hddt.fk_hoidongnghiemthu_id = hd.pk_hoidongnghiemthu_id join tbl_vaitro vt on hddt.fk_vaitro_id = vt.pk_vaitro_id join tbl_user u on hddt.fk_user_id = u.pk_user_id where dt.pk_madetai_id=".$_GET['fk_madetai_id']);
                           }
                         ?>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12" >Ngày họp 
