@@ -143,14 +143,14 @@
                     <td class=" " style="font-weight: bold; width: 250px;"><?php echo $rows->c_tenkhoanmuc; ?></td>
                     <td class=" " style="font-weight: bold;"><?=$rows->c_diemtoida?></td>
                     <td class=" " style="font-weight: bold;">
-                      <input type="text" class="diem_chu_tich" value="<?=$rows->pk_khoanmucdiem_id?>">
+                      <input type="text" class="diem_chu_tich" value="">
                     </td>
                     <td class=" " style="font-weight: bold;">
-                      <input type="text" class="diem_phan_bien_1" value="<?=$rows->pk_khoanmucdiem_id?>">
+                      <input type="text" class="diem_phan_bien_1" value="">
                     </td>
                     <td class=" " style="font-weight: bold;">
-                      <input type="text" class="diem_phan_bien_2" value="<?=$rows->pk_khoanmucdiem_id?>">
-                      <input type="text" name="" class="pk_khoanmucdiem_id" value="<?=$rows->pk_khoanmucdiem_id?>" hidden>
+                      <input type="text" class="diem_phan_bien_2" value="">
+                      <input type="text" name="" class="pk_khoanmucdiem_id" value="<?=$rows1->pk_khoanmucdiem_id?>" hidden>
                     </td>
                    
                   </tr>
@@ -160,10 +160,10 @@
                     <td class=" "></td>
                     <td class=" "><?php echo $rows1->c_tenkhoanmuc; ?></td>
                     <td class=" "><?=$rows1->c_diemtoida?></td>
-                    <td class=" "><input type="text" class="diem_chu_tich" value="<?=$rows1->pk_khoanmucdiem_id?>"></td>
-                    <td class=" "><input type="text" class="diem_phan_bien_1" value="<?=$rows1->pk_khoanmucdiem_id?>"></td>
+                    <td class=" "><input type="text" class="diem_chu_tich" value=""></td>
+                    <td class=" "><input type="text" class="diem_phan_bien_1" value=""></td>
                     <td class=" ">
-                      <input type="text" class="diem_phan_bien_2" value="<?=$rows1->pk_khoanmucdiem_id?>">
+                      <input type="text" class="diem_phan_bien_2" value="">
                       <input type="text" name="" class="pk_khoanmucdiem_id" value="<?=$rows1->pk_khoanmucdiem_id?>" hidden>
                     </td>
                   </tr>
