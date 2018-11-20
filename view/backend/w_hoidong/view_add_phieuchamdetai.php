@@ -28,7 +28,7 @@
           <div class="x_title" >
              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" action="<?php echo $form_action; ?>">
                       <?php 
-                        $arrDt = $this->model->get_all('select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id where dt.c_trangthai in (2) '.(isset($_GET['fk_mabomon_id'])?" and bm.pk_mabomon_id=".$_GET['fk_mabomon_id']:""));
+                        $arrDt = $this->model->get_all('select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id where dt.c_trangthai in (1,2) '.(isset($_GET['fk_mabomon_id'])?" and bm.pk_mabomon_id=".$_GET['fk_mabomon_id']:""));
                       ?>
                        <div class="form-group">
 
@@ -78,7 +78,7 @@
                             $ngay_hop = explode("-", $arc->c_ngaybaove);
                             $ngay_hop = $ngay_hop[2]."-".$ngay_hop[1]."-".$ngay_hop[0];
 
-                            $hoi_dong = $this->model->get_all("select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id join tbl_hoidong_detai hddt on hddt.fk_hoidong_id = hd.pk_hoidong_id join tbl_vaitro vt on hddt.fk_vaitro_id = vt.pk_vaitro_id where dt.pk_madetai_id=".$_GET['fk_madetai_id']);
+                            $hoi_dong = $this->model->get_all("select * from tbl_detai dt join tbl_hoidong hd on hd.fk_madetai_id = dt.pk_madetai_id join tbl_hoidong_detai hddt on hddt.fk_hoidong_id = hd.pk_hoidong_id join tbl_vaitro vt on hddt.fk_vaitro_id = vt.pk_vaitro_id join tbl_user u on hddt.fk_user_id = u.pk_user_id where dt.pk_madetai_id=".$_GET['fk_madetai_id']);
                           }
                         ?>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12" >Ngày họp 
