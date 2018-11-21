@@ -30,6 +30,7 @@
             <option>Option four</option>
           </select>
         </div>
+      </div>
 
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -71,7 +72,7 @@
 							<img src="public/upload/news/<?php echo $rows->c_img; ?>" style="width: 150px;">
 						<?php endif; ?>
                     </td>
-                    <td class=" "><?php echo $rows->c_name; ?></td>
+                    <td class=" " style="width: 470px;"><?php echo $rows->c_name; ?></td>
                     <td class=" ">
                     	<?php 
 							$category = $this->model->get_a_record("select c_name from tbl_category_news where pk_category_news_id={$rows->fk_category_news_id}");
@@ -92,9 +93,9 @@
                 </tbody>
               </table>
 
-            <div>
+          <!--   <div>
 				<a href="#" class="btn btn-primary">Delete</a>
-			</div>
+			</div> -->
               <!-- phân trang -->
 	          	<div class="card-footer" style="padding:5px !important">
 					<ul class="pagination">
