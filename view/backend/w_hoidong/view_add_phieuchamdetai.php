@@ -89,13 +89,13 @@
                         </label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
                           
-                          <input type="text" name="ngay_hop" value="<?=(isset($ngay_hop)?$ngay_hop:"")?>" required class="form-control col-md-7 col-xs-12" readonly> 
+                          <input type="text" id="ngayHop" name="ngay_hop" value="<?=(isset($ngay_hop)?$ngay_hop:"")?>" required class="form-control col-md-7 col-xs-12" readonly> 
                         </div>
 
                          <label class="control-label col-md-1 col-sm-1 col-xs-12" >Địa điểm 
                         </label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
-                          <input type="text" name="dia_diem" value="<?=(isset($arc)?$arc->c_diadiem:"")?>" required class="form-control col-md-7 col-xs-12" readonly> 
+                          <input type="text" id="diaDiem" name="dia_diem" value="<?=(isset($arc)?$arc->c_diadiem:"")?>" required class="form-control col-md-7 col-xs-12" readonly> 
                         </div>
                       </div>
 
@@ -218,33 +218,44 @@
                   </div>
                 </div>
 
-                 <div class="form-group">
+                 <!-- <div class="form-group">
                      <label class="control-label col-md-1 col-sm-1 col-xs-12" style="margin-top: 10px;">Ý kiến 
                     </label>
                     <div class="col-md-5 col-sm-5 col-xs-12" style="margin-top: 10px;">
-                      <input type="text" name="y_kien" value="<?php echo isset($record->y_kien)?$record->y_kien:""; ?>" required class="form-control col-md-7 col-xs-12" id="yKien"> 
+                      <input type="text" name="" value="<?php echo isset($record->y_kien)?$record->y_kien:""; ?>" required class="form-control col-md-7 col-xs-12" id="yKien"> 
                     </div>
-                   
                     <label class="control-label col-md-1 col-sm-1 col-xs-12" style="margin-top: 10px;">Ghi chú 
                     </label>
                     <div class="col-md-5 col-sm-5 col-xs-12"style="margin-top: 10px;">
-                      <input type="text" name="ghi_chu" value="<?php echo isset($record->ghi_chu)?$record->ghi_chu:""; ?>" required class="form-control col-md-7 col-xs-12" id="ghiChu"> 
+                      <input type="text" name="" value="<?php echo isset($record->ghi_chu)?$record->ghi_chu:""; ?>" required class="form-control col-md-7 col-xs-12" id="ghiChu"> 
                     </div>
-                  </div>
-
-                   <div class="form-group">
+                  </div> -->
+                  <div class="form-group">
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" >Xếp loại <span class="required">*</span>
                       </label>
                       <div class="col-md-5 col-sm-5 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" id="xepLoai" readonly=""> 
+                        <input class="form-control col-md-4 col-xs-12" type="text" id="xepLoai" readonly=""> 
                       </div>
                   </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-1 col-sm-1 col-xs-12" style="margin-top: 10px;">Ý kiến 
+                    </label>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                      <textarea id="yKien" class="form-control" rows="3" placeholder='Nhập ý kiến'></textarea>
+                    </div>
+                    <label class="control-label col-md-1 col-sm-1 col-xs-12" style="margin-top: 10px;">Ghi chú 
+                    </label>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                      <textarea id="ghiChu" class="form-control" rows="3" placeholder='Nhập ghi chú'></textarea>
+                    </div>
+                  </div>
+                   
 
                    <div class="form-group">
                       <div class="col-md-5 col-sm-5 col-xs-12" style="margin-left: 90px; margin-top: 10px; font-weight: bold;">
                         Đúng thời hạn:
-                        <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required style=""> Quá hạn:
-                        <input type="radio" class="flat" name="gender" id="genderF" value="F" >
+                        <input type="radio" class="flat" name="gender" id="genderM" value="1" checked="" required style=""> Quá hạn:
+                        <input type="radio" class="flat" name="gender" id="genderF" value="0" >
                       </div>
                   </div>
 
@@ -286,7 +297,7 @@
         }
     });
     tong/=count;
-    debugger
+    
     if(tong<=100 && tong >=81){
       tong = 'Xuất sắc';
     }else if(tong<=80 && tong >=65){
@@ -296,7 +307,7 @@
     }else if(tong<50 && tong >=0){
       tong = 'Không đạt';
     }else{
-      tong = '';
+      tong = '0';
     }
     $('#xepLoai').val(tong);
   };
@@ -360,6 +371,11 @@
       fk_user_id: <?=$_SESSION['SS_USER']->pk_user_id?>,
       ghiChu : $('#ghiChu').val(),
       yKien : $('#yKien').val(),
+      xepLoai: $('#xepLoai').val(),
+      ngayHop: $('#ngayHop').val(),
+      diaDiem: $('#diaDiem').val(),
+      deTaiDungHan : $('input[name="gender"]:checked').val(),
+      fk_madetai_id: $('select[name="fk_madetai_id"]').val(),
       listPoint : listPoint
     }
     console.log(objReturn);
@@ -370,7 +386,7 @@
         dataType: "json",
         data: objReturn,
         success: function(data){
-          
+          debugger
           if(data.result === "OKE!"){
             alert("Thêm mới thành công!");
             location.href = "hoidong.php?controller=phieuchamdetai";
