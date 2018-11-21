@@ -208,13 +208,13 @@
                   <label class="control-label col-md-1 col-sm-1 col-xs-12" style="margin-left: 105px;">Tổng 
                   </label>
                   <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 208px;">
-                    <input id="tong_diem_chu_tich" type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
+                    <input id="tong_diem_chu_tich" onchange="" type="text"  value="" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 120px;">
-                    <input id="tong_diem_phan_bien_1" type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
+                    <input id="tong_diem_phan_bien_1" onchange="" type="text" value="" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 120px;">
-                    <input id="tong_diem_phan_bien_2" type="" name=" " value="" class="form-control col-md-4 col-xs-12" readonly="" >  
+                    <input id="tong_diem_phan_bien_2" onchange="" type="text" value="" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
                 </div>
 
@@ -236,14 +236,14 @@
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" >Xếp loại <span class="required">*</span>
                       </label>
                       <div class="col-md-5 col-sm-5 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" id="xepLoai" readonly="readonly"> 
+                        <input class="form-control col-md-7 col-xs-12" type="text" id="xepLoai" readonly=""> 
                       </div>
                   </div>
 
                    <div class="form-group">
                       <div class="col-md-5 col-sm-5 col-xs-12" style="margin-left: 90px; margin-top: 10px; font-weight: bold;">
-                        Hoàn thành đề tài đúng thời hạn:
-                        <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required style=""> Hoàn thành đề tài quá hạn:
+                        Đúng thời hạn:
+                        <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required style=""> Quá hạn:
                         <input type="radio" class="flat" name="gender" id="genderF" value="F" >
                       </div>
                   </div>
@@ -275,6 +275,31 @@
 </div>
 <!-- /page content -->
 <script type="text/javascript">
+  //--------------------------------------
+  function tinhtong(){
+    var tong = 0;
+    var count = 0;
+    $('input.tongdiem1').each(function(i,e){
+        if(e.value){
+          count++;
+          tong += parseFloat(e.value);
+        }
+    });
+    tong/=count;
+    debugger
+    if(tong<=100 && tong >=81){
+      tong = 'Xuất sắc';
+    }else if(tong<=80 && tong >=65){
+      tong = 'Khá';
+    }else if(tong<=64 && tong >=50){
+      tong = 'Đạt';
+    }else if(tong<50 && tong >=0){
+      tong = 'Không đạt';
+    }else{
+      tong = '';
+    }
+    $('#xepLoai').val(tong);
+  };
   function URL_add_parameter(url, param, value){
     var hash       = {};
     var parser     = document.createElement('a');
@@ -345,7 +370,7 @@
         dataType: "json",
         data: objReturn,
         success: function(data){
-          debugger
+          
           if(data.result === "OKE!"){
             alert("Thêm mới thành công!");
             location.href = "hoidong.php?controller=phieuchamdetai";
@@ -362,75 +387,81 @@
       var id = parseInt($(this).attr('id').split('_')[1]);
       var parent = parseInt($(this).attr('parenttr'));
       if(parent == 0 && $(`tr[parenttr="${id}"]`).length>0){
-        debugger
         $(this).find('input').attr('readonly','readonly');
       }
     });
-  });
-  //Tinh tong diem chu tich
-  $('.diem_chu_tich').on('change',function(){
-    var tong = 0;
-    var parentId = parseInt($(this).attr('parent'));
-    if(parentId > 0){
-      $(`.diem_chu_tich[parent="${parentId}"]`).each(function(i,e){
+
+    //Tinh tong diem chu tich
+    $(document).on('change', '.diem_chu_tich',function(){
+
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_chu_tich[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_chu_tich#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_chu_tich[parent="0"]').each(function(i,e){
         //console.log(e.value);
         if(e.value){
           tong += parseInt(e.value);
         }
       });
-      $(`.diem_chu_tich#parent_${parentId}`).val(tong);
-    }
-    tong=0;
-    $('.diem_chu_tich[parent="0"]').each(function(i,e){
-      //console.log(e.value);
-      if(e.value){
-        tong += parseInt(e.value);
-      }
+      $('#tong_diem_chu_tich').val(tong);
+      tinhtong();
     });
-    $('#tong_diem_chu_tich').val(tong);
-  });
-  //-----------------------------------
-  $('.diem_phan_bien_1').on('change',function(){
-    var tong = 0;
-    var parentId = parseInt($(this).attr('parent'));
-    if(parentId > 0){
-      $(`.diem_phan_bien_1[parent="${parentId}"]`).each(function(i,e){
+    //-----------------------------------
+    $(document).on('change', '.diem_phan_bien_1',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_phan_bien_1[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_phan_bien_1#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_phan_bien_1[parent="0"]').each(function(i,e){
         //console.log(e.value);
         if(e.value){
           tong += parseInt(e.value);
         }
       });
-      $(`.diem_phan_bien_1#parent_${parentId}`).val(tong);
-    }
-    tong=0;
-    $('.diem_phan_bien_1[parent="0"]').each(function(i,e){
-      //console.log(e.value);
-      if(e.value){
-        tong += parseInt(e.value);
-      }
+      $('#tong_diem_phan_bien_1').val(tong);
+      tinhtong();
     });
-    $('#tong_diem_phan_bien_1').val(tong);
-  });
-  //-----------------------------------
-  $('.diem_phan_bien_2').on('change',function(){
-    var tong = 0;
-    var parentId = parseInt($(this).attr('parent'));
-    if(parentId > 0){
-      $(`.diem_phan_bien_2[parent="${parentId}"]`).each(function(i,e){
+    //-----------------------------------
+    $('.diem_phan_bien_2').on('change',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_phan_bien_2[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_phan_bien_2#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_phan_bien_2[parent="0"]').each(function(i,e){
         //console.log(e.value);
         if(e.value){
           tong += parseInt(e.value);
         }
       });
-      $(`.diem_phan_bien_2#parent_${parentId}`).val(tong);
-    }
-    tong=0;
-    $('.diem_phan_bien_2[parent="0"]').each(function(i,e){
-      //console.log(e.value);
-      if(e.value){
-        tong += parseInt(e.value);
-      }
+      $('#tong_diem_phan_bien_2').val(tong);
+      tinhtong();
     });
-    $('#tong_diem_phan_bien_2').val(tong);
+    //-----------------------------------
   });
+  
 </script>
