@@ -286,6 +286,80 @@
 </div>
 <!-- /page content -->
 <script type="text/javascript">
+  function tinhDiemChung(){
+    //Tinh tong diem chu tich
+    $(document).on('change', '.diem_chu_tich',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_chu_tich[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_chu_tich#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_chu_tich[parent="0"]').each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $('#tong_diem_chu_tich').val(tong);
+      tinhtong();
+    });
+    //-----------------------------------
+    $(document).on('change', '.diem_phan_bien_1',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_phan_bien_1[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_phan_bien_1#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_phan_bien_1[parent="0"]').each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $('#tong_diem_phan_bien_1').val(tong);
+      tinhtong();
+    });
+    //-----------------------------------
+    $('.diem_phan_bien_2').on('change',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_phan_bien_2[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_phan_bien_2#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_phan_bien_2[parent="0"]').each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $('#tong_diem_phan_bien_2').val(tong);
+      tinhtong();
+    });
+    //-----------------------------------
+  }
+</script>
+<script type="text/javascript">
   //--------------------------------------
   function tinhtong(){
     var tong = 0;
@@ -406,78 +480,8 @@
         $(this).find('input').attr('readonly','readonly');
       }
     });
-
-    //Tinh tong diem chu tich
-    $(document).on('change', '.diem_chu_tich',function(){
-
-      var tong = 0;
-      var parentId = parseInt($(this).attr('parent'));
-      if(parentId > 0){
-        $(`.diem_chu_tich[parent="${parentId}"]`).each(function(i,e){
-          //console.log(e.value);
-          if(e.value){
-            tong += parseInt(e.value);
-          }
-        });
-        $(`.diem_chu_tich#parent_${parentId}`).val(tong);
-      }
-      tong=0;
-      $('.diem_chu_tich[parent="0"]').each(function(i,e){
-        //console.log(e.value);
-        if(e.value){
-          tong += parseInt(e.value);
-        }
-      });
-      $('#tong_diem_chu_tich').val(tong);
-      tinhtong();
-    });
-    //-----------------------------------
-    $(document).on('change', '.diem_phan_bien_1',function(){
-      var tong = 0;
-      var parentId = parseInt($(this).attr('parent'));
-      if(parentId > 0){
-        $(`.diem_phan_bien_1[parent="${parentId}"]`).each(function(i,e){
-          //console.log(e.value);
-          if(e.value){
-            tong += parseInt(e.value);
-          }
-        });
-        $(`.diem_phan_bien_1#parent_${parentId}`).val(tong);
-      }
-      tong=0;
-      $('.diem_phan_bien_1[parent="0"]').each(function(i,e){
-        //console.log(e.value);
-        if(e.value){
-          tong += parseInt(e.value);
-        }
-      });
-      $('#tong_diem_phan_bien_1').val(tong);
-      tinhtong();
-    });
-    //-----------------------------------
-    $('.diem_phan_bien_2').on('change',function(){
-      var tong = 0;
-      var parentId = parseInt($(this).attr('parent'));
-      if(parentId > 0){
-        $(`.diem_phan_bien_2[parent="${parentId}"]`).each(function(i,e){
-          //console.log(e.value);
-          if(e.value){
-            tong += parseInt(e.value);
-          }
-        });
-        $(`.diem_phan_bien_2#parent_${parentId}`).val(tong);
-      }
-      tong=0;
-      $('.diem_phan_bien_2[parent="0"]').each(function(i,e){
-        //console.log(e.value);
-        if(e.value){
-          tong += parseInt(e.value);
-        }
-      });
-      $('#tong_diem_phan_bien_2').val(tong);
-      tinhtong();
-    });
-    //-----------------------------------
+    tinhDiemChung()
+    
   });
   
 </script>

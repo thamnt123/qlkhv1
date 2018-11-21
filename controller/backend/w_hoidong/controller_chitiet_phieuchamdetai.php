@@ -12,7 +12,7 @@
 				//----
 				case "xem":
 					//lay 1 ban ghi truong ung voi id truyen vao
-					$record = $this->model->get_a_record("select * from tbl_detai where pk_madetai_id=$id");
+					$record = $this->model->get_a_record("SELECT * FROM tbl_detai_phieucham dtpc JOIN tbl_detai dt ON dtpc.fk_madetai_id = dt.pk_madetai_id JOIN tbl_user u ON u.pk_user_id = dt.fk_user_id JOIN tbl_bomon bm ON bm.pk_mabomon_id = u.fk_mabomon_id WHERE pk_detai_phieucham_id = $id");
 					$form_action = "hoidong.php?controller=chitiet_phieuchamdetai&act=xem&id=$id";
 					//load view
 					include "view/backend/w_hoidong/view_chitiet_phieuchamdetai.php";

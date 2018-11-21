@@ -59,7 +59,7 @@
                     <td class=" "><?php echo $rows->c_tenbomon;?></td>
                     <td class=" "><?php echo $rows->xep_loai;?></td>
                     <td class=" last">
-                      <button type="button" class="btn btn-default btn-xs"><a href="hoidong.php?controller=chitiet_phieuchamdetai&act=xem&id=<?php echo $rows->pk_madetai_id; ?>">Xem chi tiết</a></button>
+                      <button type="button" class="btn btn-default btn-xs"><a href="hoidong.php?controller=chitiet_phieuchamdetai&act=xem&id=<?php echo $rows->pk_detai_phieucham_id; ?>">Xem chi tiết</a></button>
                     </td>
                   </tr>
                 <?php endforeach; ?>
