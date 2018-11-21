@@ -65,7 +65,7 @@
                     </ul>
                   </li>
 
-                  <li><a href="giaovien.php?controller=ketquadetai"><i class="fa fa-edit"></i> Kết quả đề tài </a></li>
+                  <li><a href="giaovien.php?controller=phieuchamdetai"><i class="fa fa-edit"></i> Kết quả đề tài </a></li>
                   
                 
                 </ul>

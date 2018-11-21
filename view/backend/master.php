@@ -79,8 +79,8 @@
                   <li><a href="admin.php?controller=khoanmucdiem"><i class="fa fa-table"></i> Phiếu chấm nghiệm thu </a></li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Thống kê<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin.php?controller=dungthoihan">Đề tài hoàn thành đúng thời hạn</a></li>
-                      <li><a href="admin.php?controller=quathoihan">Đề tài hoàn thành quá thời hạn</a></li>
+                      <li><a href="admin.php?controller=detaidunghan">Đề tài hoàn thành đúng thời hạn</a></li>
+                      <li><a href="admin.php?controller=detaiquahan">Đề tài hoàn thành quá thời hạn</a></li>
                     </ul>
                   </li>
                 
