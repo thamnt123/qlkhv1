@@ -30,10 +30,10 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="fk_mabomon_id" class="form-control col-md-7 col-xs-12">
                             <?php 
-                              $bomon = $this->model->get_all("SELECT * from tbl_bomon bm join tbl_user u on bm.pk_mabomon_id=u.fk_mabomon_id join tbl_detai dt on dt.fk_user_id = u.pk_user_id order by bm.pk_mabomon_id desc");
+                              $bomon = $this->model->get_all("select * from tbl_bomon order by pk_mabomon_id desc");
                               foreach($bomon as $rows):
                              ?>
-                            <option <?php if(isset($_GET['fk_mabomon_id']) && $_GET['fk_mabomon_id'] ==$rows->pk_mabomon_id){echo 'selected';} elseif(isset($record->fk_madetai_id)&&$record->fk_madetai_id==$rows->pk_madetai_id){echo 'selected';}  ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
+                            <option <?php if(isset($_GET['fk_mabomon_id']) && $_GET['fk_mabomon_id'] ==$rows->pk_mabomon_id){echo 'selected';} elseif(isset($record->fk_mabomon_id)&&$record->fk_mabomon_id==$rows->pk_mabomon_id){echo 'selected';}  ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>

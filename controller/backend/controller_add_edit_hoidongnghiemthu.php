@@ -14,7 +14,7 @@
 				//----
 				case "edit":
 					//lay 1 ban ghi truong ung voi id truyen vao
-					$record = $this->model->get_a_record("select * from tbl_hoidongnghiemthu where pk_hoidongnghiemthu_id=$id");
+					$record = $this->model->get_a_record("select * from tbl_hoidongnghiemthu hd join tbl_detai dt on dt.pk_madetai_id = hd.fk_madetai_id JOIN tbl_user u on u.pk_user_id = dt.fk_user_id join tbl_bomon bm on bm.pk_mabomon_id=u.fk_mabomon_id where hd.pk_hoidongnghiemthu_id=$id");
 					$form_action = "admin.php?controller=add_edit_hoidongnghiemthu&act=do_edit&id=$id";
 					//load view
 					include "view/backend/view_add_edit_hoidongnghiemthu.php";
