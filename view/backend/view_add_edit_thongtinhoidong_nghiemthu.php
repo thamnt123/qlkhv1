@@ -45,12 +45,13 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                           <select name="fk_user_id" class="form-control col-md-7 col-xs-12">
                             <?php 
-                              $giamkhao = $this->model->get_all("select * from tbl_user where fk_mabomon_id in (select fk_mabomon_id from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id WHERE dt.pk_madetai_id = $id_detai) order by pk_user_id desc");
+                              $giamkhao = $this->model->get_all("SELECT * from tbl_user where fk_mabomon_id=".(isset($_GET['fk_mabomon_id'])?$_GET['fk_mabomon_id']:(isset($record->pk_mabomon_id)?$record->pk_mabomon_id:""))." order by pk_user_id desc");
                               foreach($giamkhao as $rows):
                              ?>
-                            <option <?php if(isset($record->fk_user_id)&&$record->fk_user_id==$rows->pk_user_id): ?> selected <?php endif; ?> value="<?php echo $rows->pk_user_id; ?>"><?php echo $rows->c_fullname; ?></option>
+                            <option <?php if(isset($record->pk_user_id)&&$record->pk_user_id==$rows->pk_user_id): ?> selected <?php endif; ?> value="<?php echo $rows->pk_user_id; ?>"><?php echo $rows->c_fullname; ?></option>
                             <?php endforeach; ?>
                           </select>
+
                         </div>
                       </div>
 
