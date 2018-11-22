@@ -53,7 +53,7 @@
                     <td class="a-center ">
                       <input type="checkbox" class="flat" name="table_records">
                     </td>
-                    <td class=" "><?php echo $rows->pk_hoidongnghiemthu_id; ?></td>
+                    <td class=" "><?php echo $rows->pk_hoidong_id; ?></td>
                     <td class=" ">
                       <?php 
                         $giamkhao = $this->model->get_a_record("select c_fullname from tbl_user where pk_user_id={$rows->fk_user_id}");

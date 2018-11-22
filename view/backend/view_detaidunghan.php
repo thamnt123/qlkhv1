@@ -35,7 +35,7 @@
 
         <div class="control-label col-sm-3 col-xs-12">Số đề tài hoàn thành đúng hạn:</div>
         <div class="col-sm-1 col-xs-12">
-          <input type="text" name="c_fullname" value="" class="form-control col-md-7 col-xs-12" style="margin-left: -60px;">
+          <input type="text" name="c_fullname" class="form-control col-md-7 col-xs-12" style="margin-left: -60px;" value="<?=$total?>">
         </div>
       </form>
 

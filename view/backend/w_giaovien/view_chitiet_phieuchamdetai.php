@@ -253,3 +253,203 @@
 </div>
 <!-- /page content -->
 </script>
+<script type="text/javascript">
+  function tinhDiemChung(){
+    //Tinh tong diem chu tich
+    $(document).on('change', '.diem_chu_tich',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_chu_tich[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_chu_tich#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_chu_tich[parent="0"]').each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $('#tong_diem_chu_tich').val(tong);
+      tinhtong();
+    });
+    //-----------------------------------
+    $(document).on('change', '.diem_phan_bien_1',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_phan_bien_1[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_phan_bien_1#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_phan_bien_1[parent="0"]').each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $('#tong_diem_phan_bien_1').val(tong);
+      tinhtong();
+    });
+    //-----------------------------------
+    $('.diem_phan_bien_2').on('change',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_phan_bien_2[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_phan_bien_2#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_phan_bien_2[parent="0"]').each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $('#tong_diem_phan_bien_2').val(tong);
+      tinhtong();
+    });
+    //-----------------------------------
+  }
+</script>
+<script type="text/javascript">
+  //--------------------------------------
+  function tinhtong(){
+    var tong = 0;
+    var count = 0;
+    $('input.tongdiem1').each(function(i,e){
+        if(e.value){
+          count++;
+          tong += parseFloat(e.value);
+        }
+    });
+    tong/=count;
+    
+    if(tong<=100 && tong >=81){
+      tong = 'Xuất sắc';
+    }else if(tong<=80 && tong >=65){
+      tong = 'Khá';
+    }else if(tong<=64 && tong >=50){
+      tong = 'Đạt';
+    }else if(tong<50 && tong >=0){
+      tong = 'Không đạt';
+    }else{
+      tong = '0';
+    }
+    $('#xepLoai').val(tong);
+  };
+  function URL_add_parameter(url, param, value){
+    var hash       = {};
+    var parser     = document.createElement('a');
+
+    parser.href    = url;
+
+    var parameters = parser.search.split(/\?|&/);
+
+    for(var i=0; i < parameters.length; i++) {
+        if(!parameters[i])
+            continue;
+
+        var ary      = parameters[i].split('=');
+        hash[ary[0]] = ary[1];
+    }
+
+    hash[param] = value;
+
+    var list = [];  
+    Object.keys(hash).forEach(function (key) {
+        list.push(key + '=' + hash[key]);
+    });
+
+    parser.search = '?' + list.join('&');
+    return parser.href;
+  }
+
+  $(function(){
+    $('select.form-control[name="fk_mabomon_id"]').on('change',function(){
+      //console.log($(this).val());
+      var href = URL_add_parameter(window.location.href,'fk_mabomon_id',$(this).val());
+      href = URL_add_parameter(href,'fk_madetai_id',0);
+      window.location.href = href;
+    });
+    $('select.form-control[name="fk_madetai_id"]').on('change',function(){
+      //console.log($(this).val());
+      window.location.href = URL_add_parameter(window.location.href,'fk_madetai_id',$(this).val());
+    });
+  });
+
+  function submitForm(){
+    var listPoint = [];
+    $('.linePoint').each(function(){
+
+      let diem_chu_tich = $(this).find('.diem_chu_tich').val();
+      let diem_phan_bien_1 = $(this).find('.diem_phan_bien_1').val();
+      let diem_phan_bien_2 = $(this).find('.diem_phan_bien_2').val();
+      let pk_khoanmucdiem_id = $(this).find('.pk_khoanmucdiem_id').val();
+      var item = {
+        pk_khoanmucdiem_id: pk_khoanmucdiem_id?pk_khoanmucdiem_id:0,
+        diem_chu_tich : diem_chu_tich?diem_chu_tich:0,
+        diem_phan_bien_1 : diem_phan_bien_1?diem_phan_bien_1:0,
+        diem_phan_bien_2 : diem_phan_bien_2?diem_phan_bien_2:0
+      };
+      listPoint.push(item);
+    });
+    var objReturn = {
+      fk_user_id: <?=$_SESSION['SS_USER']->pk_user_id?>,
+      ghiChu : $('#ghiChu').val(),
+      yKien : $('#yKien').val(),
+      xepLoai: $('#xepLoai').val(),
+      ngayHop: $('#ngayHop').val(),
+      diaDiem: $('#diaDiem').val(),
+      deTaiDungHan : $('input[name="gender"]:checked').val(),
+      fk_madetai_id: $('select[name="fk_madetai_id"]').val(),
+      listPoint : listPoint
+    }
+    console.log(objReturn);
+    $.ajax({
+        url: "view/backend/w_hoidong/controller_add_diem_phieucham.php",
+        type: "get",
+        contentType : 'application/json; charset=utf-8',
+        dataType: "json",
+        data: objReturn,
+        success: function(data){
+          debugger
+          if(data.result === "OKE!"){
+            alert("Thêm mới thành công!");
+            location.href = "hoidong.php?controller=phieuchamdetai";
+          }else{
+            alert("Có lỗi xảy ra!");
+          }
+        }
+    });
+  }
+</script>
+<script type="text/javascript">
+  $(function(){
+    $('tr[id]').each(function(i,e){
+      var id = parseInt($(this).attr('id').split('_')[1]);
+      var parent = parseInt($(this).attr('parenttr'));
+      if(parent == 0 && $(`tr[parenttr="${id}"]`).length>0){
+        $(this).find('input').attr('readonly','readonly');
+      }
+    });
+    tinhDiemChung()
+    
+  });
+  
+</script>
