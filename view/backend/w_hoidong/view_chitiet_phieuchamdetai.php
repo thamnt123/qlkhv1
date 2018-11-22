@@ -159,10 +159,10 @@
                     <td class=" "></td>
                     <td class=" "><?php echo $rows1->c_tenkhoanmuc; ?></td>
                     <td class=" "><?=$rows1->c_diemtoida?></td>
-                    <td class=" "><input parent="<?=$rows1->pk_khoanmucdiem_id?>" type="text" class="form-control diem_chu_tich" value="<?=$rows->diem_chu_tich?>" readonly></td>
-                    <td class=" "><input parent="<?=$rows1->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_1" value="<?=$rows1->diem_phan_bien_1?>" readonly></td>
+                    <td class=" "><input parent="<?=$rows1->parentId?>" type="text" class="form-control diem_chu_tich" value="<?=$rows1->diem_chu_tich?>" readonly></td>
+                    <td class=" "><input parent="<?=$rows1->parentId?>" type="text" class="form-control diem_phan_bien_1" value="<?=$rows1->diem_phan_bien_1?>" readonly></td>
                     <td class=" ">
-                      <input parent="<?=$rows1->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_2" value="<?=$rows1->diem_phan_bien_2?>" readonly>
+                      <input parent="<?=$rows1->parentId?>" type="text" class="form-control diem_phan_bien_2" value="<?=$rows1->diem_phan_bien_2?>" readonly>
                     </td>
                   </tr>
                 <?php endforeach; ?>
