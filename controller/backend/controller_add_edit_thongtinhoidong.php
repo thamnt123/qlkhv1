@@ -11,7 +11,7 @@
 				$_SESSION['ID_HOIDONG_DT'] = $_GET["id"];
 			}
 			$id_hd_dt = isset($_SESSION['ID_HOIDONG_DT'])?$_SESSION['ID_HOIDONG_DT']:0;
-			$fk_hoidong_id = $_SESSION["ID_HOIDONG"];
+			$fk_hoidong_id = isset($_SESSION["ID_HOIDONG"])?$_SESSION["ID_HOIDONG"]:0;
 
 			//print '<script>alert("'.$fk_hoidong_id.'");</script>';
 			switch($act){
