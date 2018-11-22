@@ -162,7 +162,7 @@
                     <td class=" "><input parent="<?=$rows1->pk_khoanmucdiem_id?>" type="text" class="form-control diem_chu_tich" value="<?=$rows->diem_chu_tich?>" readonly></td>
                     <td class=" "><input parent="<?=$rows1->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_1" value="<?=$rows1->diem_phan_bien_1?>" readonly></td>
                     <td class=" ">
-                      <input parent="<?=$rows1->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_2" value="<?=$rows->diem_phan_bien_2?>" readonly>
+                      <input parent="<?=$rows1->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_2" value="<?=$rows1->diem_phan_bien_2?>" readonly>
                     </td>
                   </tr>
                 <?php endforeach; ?>
