@@ -12,7 +12,9 @@
 			}	
 			$id_hd_dt = $_SESSION['ID_HOIDONG_DT'];
 			$fk_hoidongnghiemthu_id = $_SESSION["ID_HOIDONG"];
-
+			if(isset($_GET["fk_mabomon_id"])){
+				$id=0;
+			}
 			//print '<script>alert("'.$fk_hoidong_id.'");</script>';
 			switch($act){
 				//----

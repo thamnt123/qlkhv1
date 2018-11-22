@@ -68,8 +68,8 @@
                     </td>
                  
                     <td class=" last">
-                    	<a href="admin.php?controller=add_edit_thongtinhoidong_nghiemthu&act=edit&id=<?php echo $rows->pk_hoidongnghiemthu_id; ?>">Edit</a>&nbsp;&nbsp;
-						          <a onclick="return window.confirm('Are you sure?');" href="admin.php?controller=add_edit_thongtinhoidong_nghiemthu&act=delete&id=<?php echo $rows->pk_hoidongnghiemthu_id; ?>">Delete</a>
+                    	<a href="admin.php?controller=add_edit_thongtinhoidong_nghiemthu&act=edit&id=<?php echo $rows->pk_hoidong_id; ?>">Edit</a>&nbsp;&nbsp;
+						          <a onclick="return window.confirm('Are you sure?');" href="admin.php?controller=add_edit_thongtinhoidong_nghiemthu&act=delete&id=<?php echo $rows->pk_hoidong_id; ?>">Delete</a>
                     </td>
                   </tr>
                 <?php endforeach; ?>
