@@ -45,7 +45,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                           <select name="fk_user_id" class="form-control col-md-7 col-xs-12">
                             <?php 
-                              $giamkhao = $this->model->get_all("SELECT * from tbl_user where fk_mabomon_id=".(isset($_GET['fk_mabomon_id'])?$_GET['fk_mabomon_id']:$record->pk_mabomon_id)." order by pk_user_id desc");
+                              $giamkhao = $this->model->get_all("SELECT * from tbl_user where fk_mabomon_id=".(isset($_GET['fk_mabomon_id'])?$_GET['fk_mabomon_id']:(isset($record->pk_mabomon_id)?$record->pk_mabomon_id:""))." order by pk_user_id desc");
                               foreach($giamkhao as $rows):
                              ?>
                             <option <?php if($record->pk_user_id==$rows->pk_user_id): ?> selected <?php endif; ?> value="<?php echo $rows->pk_user_id; ?>"><?php echo $rows->c_fullname; ?></option>
