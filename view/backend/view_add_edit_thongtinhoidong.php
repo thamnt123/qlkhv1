@@ -66,8 +66,11 @@
                             <option <?php if(isset($record->fk_vaitro_id)&&$record->fk_vaitro_id==$rows->pk_vaitro_id): ?> selected <?php endif; ?> value="<?php echo $rows->pk_vaitro_id; ?>"><?php echo $rows->c_vaitro; ?></option>
                             <?php endforeach; ?>
                           </select>
-                          <?php $idhddt = isset($record)&&isset($record->pk_hoidong_id)?$record->pk_hoidong_id:0; ?>
-                          <input type="text" name="pk_hd_detai_id" value="<?=$idhddt?>" hidden>
+                          <?php 
+                            $idhddt = isset($record)&&isset($record->pk_hoidong_id)?$record->pk_hoidong_id:0; 
+                            ($idhddt>0)?$_SESSION['fking_hddt'] = $idhddt:"";
+                          ?>
+                          <input type="text" name="pk_hd_detai_id" value="<?=$_SESSION['fking_hddt']?>" hidden>
                         </div>
                       </div>
                       <div class="ln_solid"></div>
