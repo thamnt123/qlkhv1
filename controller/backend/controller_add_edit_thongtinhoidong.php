@@ -10,6 +10,9 @@
 			if(isset($_GET["id"])){
 				$_SESSION['ID_HOIDONG_DT'] = $_GET["id"];
 			}
+			if(isset($_GET["fk_mabomon_id"])){
+				$id=0;
+			}
 			$id_hd_dt = isset($_SESSION['ID_HOIDONG_DT'])?$_SESSION['ID_HOIDONG_DT']:0;
 			$fk_hoidong_id = isset($_SESSION["ID_HOIDONG"])?$_SESSION["ID_HOIDONG"]:0;
 
@@ -18,7 +21,7 @@
 				//----
 				case "edit":
 					//lay 1 ban ghi truong ung voi id truyen vao
-					$record = $this->model->get_a_record("select * from tbl_hoidong_detai where pk_hoidong_id=$id");
+					$record = $this->model->get_a_record("select * from tbl_hoidong_detai hddt join tbl_user u on u.pk_user_id = hddt.fk_user_id join tbl_bomon bm on u.fk_mabomon_id = bm.pk_mabomon_id where hddt.pk_hoidong_id=$id");
 					$form_action = "admin.php?controller=add_edit_thongtinhoidong&act=do_edit&id=$id";
 					//load view
 					include "view/backend/view_add_edit_thongtinhoidong.php";
