@@ -46,7 +46,7 @@
         <!-- end lọc bộ môn -->
         
         <div class="control-label col-md-0 col-sm-1 col-xs-12">
-          <button type="submit" name="Process" value="Process" class="btn btn-success">Submit</button>
+          <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
         </div>
       </form>
 
@@ -134,7 +134,11 @@
                         //alert($('#btn_xemchitiet').attr('href'));
                       }
                     </script>
+
                     <td class=" last">
+                      <a href="admin.php?controller=detaidangthuchien&<?php echo "act=huy&id=".$rows->pk_madetai_id ?>">
+                          <button  type="button" class="btn btn-default btn-xs btn-duyet">Hủy</button>
+                      </a>
                       <button type="button" class="btn btn-default btn-xs"><a id="btn_xemchitiet" onclick="xemChiTiet().call(this);" href="admin.php?controller=chitiet_detaidangthuchien&act=xem&id=<?=$rows->pk_madetai_id?>">Xem chi tiết</a></button>                   
                     </td>
                     

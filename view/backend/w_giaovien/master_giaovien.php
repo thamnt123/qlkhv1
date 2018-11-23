@@ -50,21 +50,16 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="index.php"><i class="fa fa-home"></i>Trang chủ </a></li>
-                  <li><a href="dashboard.php"><i class="fa fa-desktop"></i>Dashboard </a></li>
+                  <li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard </a></li>
+                  
 
                   <li><a href="giaovien.php?controller=dangkidetai"><i class="fa fa-edit"></i> Đăng ký đề tài </a></li>
                   <li><a href="giaovien.php?controller=detaidathuchien"><i class="fa fa-edit"></i> Các đề tài đã thực hiện </a></li>
                   <li><a href="giaovien.php?controller=detaithamkhao"><i class="fa fa-edit"></i> Đề tài tham khảo </a></li>
                   <li><a href="giaovien.php?controller=baocaotiendo"><i class="fa fa-edit"></i> Báo cáo tiến độ </a></li>
                   
-                  <li><a><i class="fa fa-desktop"></i> Hội đồng và thời gian <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="giaovien.php?controller=xemhoidong">Duyệt đề tài</a></li>
-                      <li><a href="giaovien.php?controller=xemhoidongnghiemthu">Nghiệm thu đề tài</a></li>
-                    </ul>
-                  </li>
-
+                  <li><a href="giaovien.php?controller=xemhoidongnghiemthu"><i class="fa fa-desktop"></i> Hội đồng nghiệm thu đề tài </a></li>
+                    
                   <li><a href="giaovien.php?controller=phieuchamdetai"><i class="fa fa-edit"></i> Kết quả đề tài </a></li>
                   
                 

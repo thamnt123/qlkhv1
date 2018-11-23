@@ -52,10 +52,11 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="index.php"><i class="fa fa-home"></i>Trang chủ </a></li>
-                  <li><a href="dashboard.php"><i class="fa fa-desktop"></i>Dashboard </a></li>
+                  <li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard </a></li>
+                 
                   <li><a><i class="fa fa-edit"></i> Quản lý đề tài <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                      <li><a href="admin.php?controller=theodoidetai">Theo dõi đề tài</a></li>
                       <li><a href="admin.php?controller=detaihoanthanh">Đề tài đã hoàn thành</a></li>
                       <li><a href="admin.php?controller=detaidangthuchien">Đề tài đang thực hiện</a></li>
                       <li><a href="admin.php?controller=detaichoxetduyet">Đề tài chờ xét duyệt</a></li>
@@ -66,16 +67,11 @@
                     <ul class="nav child_menu">
                       <li><a href="admin.php?controller=user">Quản lý người dùng</a></li>
                       <li><a href="admin.php?controller=bomon">Quản lý bộ môn/phòng ban</a></li>
-                      <li><a href="admin.php?controller=news">Quản lý tin tức</a></li>
+                      <!-- <li><a href="admin.php?controller=news">Quản lý tin tức</a></li> -->
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> Quản lý hội đồng - thời gian<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="admin.php?controller=hoidong">Duyệt đề tài</a></li>
-                      <li><a href="admin.php?controller=hoidongnghiemthu">Nghiệm thu đề tài</a></li>
-                    </ul>
+                  <li><a href="admin.php?controller=hoidongnghiemthu"><i class="fa fa-desktop"></i>Hội đồng nghiệm thu đề tài </a>
                   </li>
-
                   <li><a href="admin.php?controller=khoanmucdiem"><i class="fa fa-table"></i> Phiếu chấm nghiệm thu </a></li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Thống kê<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">

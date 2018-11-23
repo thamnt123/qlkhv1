@@ -50,8 +50,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="index.php"><i class="fa fa-home"></i>Trang chủ </a></li>
-                  <li><a href="dashboard.php"><i class="fa fa-desktop"></i>Dashboard </a></li>
+                  <li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard </a></li>
 
                   <li><a><i class="fa fa-edit"></i> Quản lý đề tài <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -61,11 +60,7 @@
                       <li><a href="truongbomon.php?controller=detaibihuy">Đề tài bị hủy</a></li>
                     </ul>
                   </li>
-                 <li><a><i class="fa fa-desktop"></i> Hội đồng - thời gian <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="truongbomon.php?controller=xemhoidong">Duyệt đề tài</a></li>
-                      <li><a href="truongbomon.php?controller=xemhoidongnghiemthu">Nghiệm thu đề tài</a></li>
-                    </ul>
+                 <li><a href="truongbomon.php?controller=xemhoidongnghiemthu"><i class="fa fa-desktop"></i> Hội đồng nghiệm thu đề tài </a>
                   </li>
                    <li><a href="truongbomon.php?controller=baocaotiendo"><i class="fa fa-table"></i> Xem tiến độ đề tài </a></li>
                   <li><a href="truongbomon.php?controller=phieuchamdetai"><i class="fa fa-table"></i> Xem kết quả đề tài </a></li>

@@ -47,7 +47,7 @@
         <!-- end lọc bộ môn -->
         
         <div class="control-label col-md-0 col-sm-1 col-xs-12">
-          <button type="submit" name="Process" value="Process" class="btn btn-success">Submit</button>
+          <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
         </div>
       </form>
 

@@ -65,7 +65,16 @@
                 <?php endforeach; ?>
                 </tbody>
               </table>
-            
+              <!-- phân trang -->
+              <div class="card-footer" style="padding:5px !important">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Trang</a></li>
+          <?php for($i=1; $i<=$num_page; $i++): ?>  
+            <li class="page-item"><a class="page-link" href="hoidong.php?controller=phieuchamdetai&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+          <?php endfor; ?>
+          </ul>
+        </div>
+      <!-- end phân trang -->
            
             </div>
           </div>

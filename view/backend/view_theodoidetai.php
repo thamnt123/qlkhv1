@@ -4,7 +4,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Đề tài chờ xét duyệt</h3>
+        <h3>Theo dõi đề tài chờ xét duyệt</h3>
       </div>
 
       <div class="clearfix"></div>
@@ -59,7 +59,7 @@
                     <th class="column-title">File mô tả </th>
                     <th class="column-title">Trạng thái </th>
                    
-                    <th class="column-title">Action </th>
+                    <!-- <th class="column-title">Action </th> -->
                     </th>
                     <th class="bulk-actions" colspan="7">
                       <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -92,10 +92,10 @@
                   
                     
                     <td class=" ">
-                    	<?php 
-							           $date = date_create($rows->c_tungay);
-							           echo date_format($date,"d/m/Y");			
-						          ?>	
+                      <?php 
+                         $date = date_create($rows->c_tungay);
+                         echo date_format($date,"d/m/Y");     
+                      ?>  
                     </td>
                     <td class=" ">
                       <?php 
@@ -123,15 +123,10 @@
                         //alert($('#btn_xemchitiet').attr('href'));
                       }
                     </script>
-                    <td class=" last">
-                       <a href="admin.php?controller=detaichoxetduyet&<?php echo "act=duyet&id=".$rows->pk_madetai_id ?>">
-                          <button  type="button" class="btn btn-default btn-xs btn-duyet">Duyệt</button>
-                      </a>
-                      <a href="admin.php?controller=detaichoxetduyet&<?php echo "act=huy&id=".$rows->pk_madetai_id ?>">
-                          <button  type="button" class="btn btn-default btn-xs btn-duyet">Hủy</button>
-                      </a>
+                    <!-- <td class=" last">
+                      
                       <button type="button" class="btn btn-default btn-xs"><a id="btn_xemchitiet" onclick="xemChiTiet().call(this);" href="admin.php?controller=chitiet_detaichoxetduyet&act=xem&id=<?=$rows->pk_madetai_id?>">Xem chi tiết</a></button>                   
-                    </td>
+                    </td> -->
                   
                   </tr>
                 <?php endforeach; ?>
@@ -140,15 +135,15 @@
             
             
               <!-- phân trang -->
-	          	<div class="card-footer" style="padding:5px !important">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#">Trang</a></li>
-					<?php for($i=1; $i<=$num_page; $i++): ?>	
-						<li class="page-item"><a class="page-link" href="admin.php?controller=detaichoxetduyet&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-					<?php endfor; ?>
-					</ul>
-				</div>
-			<!-- end phân trang -->
+              <div class="card-footer" style="padding:5px !important">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Trang</a></li>
+          <?php for($i=1; $i<=$num_page; $i++): ?>  
+            <li class="page-item"><a class="page-link" href="admin.php?controller=theodoidetai&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+          <?php endfor; ?>
+          </ul>
+        </div>
+      <!-- end phân trang -->
             </div>
           </div>
         </div>
@@ -165,5 +160,5 @@
 
 
 
-		
-		
+    
+    

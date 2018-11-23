@@ -148,6 +148,8 @@
                     <th class="column-title" >Điểm đánh giá </th>
                     <th class="column-title" >Điểm đánh giá </th>
                     <th class="column-title" >Điểm đánh giá </th>
+                    <th class="column-title" >Điểm đánh giá </th>
+                    <th class="column-title" >Điểm đánh giá </th>
                   </tr>
 
                    <tr class="headings"> 
@@ -155,6 +157,8 @@
                       <td></td>
                       <td></td>
                       <td>Chủ tịch</td>
+                      <td>Ủy viên 1</td>
+                      <td>Ủy viên 2</td>
                       <td>Phản biện 1</td>
                       <td>Phản biện 2</td>
                     </tr>
@@ -174,6 +178,12 @@
                       <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_chu_tich" value="" >
                     </td>
                     <td class=" " style="font-weight: bold;">
+                      <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_uy_vien_1" value="" >
+                    </td>
+                    <td class=" " style="font-weight: bold;">
+                      <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_uy_vien_2" value="" >
+                    </td>
+                    <td class=" " style="font-weight: bold;">
                       <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_phan_bien_1" value="" >
                     </td>
                     <td class=" " style="font-weight: bold;">
@@ -189,6 +199,8 @@
                     <td class=" "><?php echo $rows1->c_tenkhoanmuc; ?></td>
                     <td class=" "><?=$rows1->c_diemtoida?></td>
                     <td class=" "><input parent="<?=$rows->pk_khoanmucdiem_id?>" type="text" class="form-control diem_chu_tich" value=""></td>
+                    <td class=" "><input parent="<?=$rows->pk_khoanmucdiem_id?>" type="text" class="form-control diem_uy_vien_1" value=""></td>
+                    <td class=" "><input parent="<?=$rows->pk_khoanmucdiem_id?>" type="text" class="form-control diem_uy_vien_2" value=""></td>
                     <td class=" "><input parent="<?=$rows->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_1" value=""></td>
                     <td class=" ">
                       <input parent="<?=$rows->pk_khoanmucdiem_id?>" type="text" class="form-control diem_phan_bien_2" value="">
@@ -207,13 +219,19 @@
                 <div class="form-group">
                   <label class="control-label col-md-1 col-sm-1 col-xs-12" style="margin-left: 105px;">Tổng 
                   </label>
-                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 208px;">
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 160px;">
                     <input id="tong_diem_chu_tich" onchange="" type="text"  value="" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
-                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 120px;">
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 47px;">
+                    <input id="tong_diem_uy_vien_1" onchange="" type="text" value="" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 47px;">
+                    <input id="tong_diem_uy_vien_2" onchange="" type="text" value="" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 47px;">
                     <input id="tong_diem_phan_bien_1" onchange="" type="text" value="" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
-                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 120px;">
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 47px;">
                     <input id="tong_diem_phan_bien_2" onchange="" type="text" value="" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
                 </div>
@@ -231,9 +249,16 @@
                     </div>
                   </div> -->
                   <div class="form-group">
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12" >Điểm trung bình 
+                      </label>
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input class="form-control col-md-4 col-xs-12" type="text" id="diemTrungBinh" readonly=""> 
+                      </div>
+                  </div>
+                  <div class="form-group">
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" >Xếp loại <span class="required">*</span>
                       </label>
-                      <div class="col-md-5 col-sm-5 col-xs-12">
+                      <div class="col-md-3 col-sm-3 col-xs-12">
                         <input class="form-control col-md-4 col-xs-12" type="text" id="xepLoai" readonly=""> 
                       </div>
                   </div>
@@ -308,6 +333,52 @@
         }
       });
       $('#tong_diem_chu_tich').val(tong);
+      tinhtong();
+    });
+    //-----------------------------------
+    $(document).on('change', '.diem_uy_vien_1',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_uy_vien_1[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_uy_vien_1#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_uy_vien_1[parent="0"]').each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $('#tong_diem_uy_vien_1').val(tong);
+      tinhtong();
+    });
+    //-----------------------------------
+     $(document).on('change', '.diem_uy_vien_2',function(){
+      var tong = 0;
+      var parentId = parseInt($(this).attr('parent'));
+      if(parentId > 0){
+        $(`.diem_uy_vien_2[parent="${parentId}"]`).each(function(i,e){
+          //console.log(e.value);
+          if(e.value){
+            tong += parseInt(e.value);
+          }
+        });
+        $(`.diem_uy_vien_2#parent_${parentId}`).val(tong);
+      }
+      tong=0;
+      $('.diem_uy_vien_2[parent="0"]').each(function(i,e){
+        //console.log(e.value);
+        if(e.value){
+          tong += parseInt(e.value);
+        }
+      });
+      $('#tong_diem_uy_vien_2').val(tong);
       tinhtong();
     });
     //-----------------------------------
@@ -430,12 +501,16 @@
     $('.linePoint').each(function(){
 
       let diem_chu_tich = $(this).find('.diem_chu_tich').val();
+      let diem_uy_vien_1 = $(this).find('.diem_uy_vien_1').val();
+      let diem_uy_vien_2 = $(this).find('.diem_uy_vien_2').val();
       let diem_phan_bien_1 = $(this).find('.diem_phan_bien_1').val();
       let diem_phan_bien_2 = $(this).find('.diem_phan_bien_2').val();
       let pk_khoanmucdiem_id = $(this).find('.pk_khoanmucdiem_id').val();
       var item = {
         pk_khoanmucdiem_id: pk_khoanmucdiem_id?pk_khoanmucdiem_id:0,
         diem_chu_tich : diem_chu_tich?diem_chu_tich:0,
+        diem_uy_vien_1 : diem_uy_vien_1?diem_uy_vien_1:0,
+        diem_uy_vien_2 : diem_uy_vien_2?diem_uy_vien_2:0,
         diem_phan_bien_1 : diem_phan_bien_1?diem_phan_bien_1:0,
         diem_phan_bien_2 : diem_phan_bien_2?diem_phan_bien_2:0
       };

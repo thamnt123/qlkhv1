@@ -6,10 +6,19 @@
       <div class="title_left">
         <h3>Danh sách đề tài đã hoàn thành</h3>
       </div>
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <!-- <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span> -->
+          </div>
+        </div>
+      </div>
+    </div>
       <div class="clearfix"></div>
       <form method="post" enctype="multipart/form-data" action="<?php echo $form_action; ?>">
-       
-
         <div class="control-label col-md-0 col-sm-1 col-xs-12">Chọn năm:</div>
         <div class="col-md-3 col-sm-3 col-xs-12" >
           <select class="form-control" name="nam" id="nam">
@@ -53,7 +62,7 @@
         </div>
         <!-- end lọc bộ môn -->
         <div class="control-label col-md-0 col-sm-1 col-xs-12" >
-          <button type="submit" name="Process" value="Process" class="btn btn-success">Submit</button>
+          <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
         </div>
       </form>
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -152,8 +161,6 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
 <!-- /page content -->
 
 

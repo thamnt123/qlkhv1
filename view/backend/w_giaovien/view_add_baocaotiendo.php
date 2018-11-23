@@ -55,24 +55,10 @@
                         </div>
                       </div>
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Từ ngày 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" name="c_tungay" value="<?php echo isset($record->c_tungay)?$record->c_tungay:""; ?>" required class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
+                      
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Đến ngày 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" name="c_denngay" value="<?php echo isset($record->c_denngay)?$record->c_denngay:""; ?>" required class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nội dung tiến độ 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Các kết quả đã đạt được 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" name="c_noidungtiendo" value="<?php echo isset($record->c_noidungtiendo)?$record->c_noidungtiendo:""; ?>" required class="form-control col-md-7 col-xs-12">
@@ -80,7 +66,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Hoàn thành tiến độ(%) 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tiến độ hoàn thành đề tài 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" name="c_hoanthanhtiendo" value="<?php echo isset($record->c_hoanthanhtiendo)?$record->c_hoanthanhtiendo:""; ?>" required class="form-control col-md-7 col-xs-12">

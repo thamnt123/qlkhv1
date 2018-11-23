@@ -50,21 +50,13 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="index.php"><i class="fa fa-home"></i>Trang chủ </a></li>
-                  <li><a href="dashboard.php"><i class="fa fa-desktop"></i>Dashboard </a></li>
-
-                  <li><a href="hoidong.php?controller=detaichoxetduyet"><i class="fa fa-edit"></i>Đề tài chờ xét duyệt</a> </li>
-
-                  <li><a href="hoidong.php?controller=detaidangthuchien"><i class="fa fa-edit"></i>Đề tài đang thực hiện</a> </li>
-
+                  <li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard </a></li>
+                <!--   <li><a href="hoidong.php?controller=detaidangthuchien"><i class="fa fa-edit"></i>Đề tài đang thực hiện</a> </li>
+ -->
                    <li><a href="hoidong.php?controller=phieuchamdetai"><i class="fa fa-desktop"></i> Phiếu chấm đề tài </a>
                   </li>
 
-                  <li><a><i class="fa fa-desktop"></i> Hội đồng - thời gian<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="hoidong.php?controller=hoidong">Duyệt đề tài</a></li>
-                      <li><a href="hoidong.php?controller=hoidongnghiemthu">Nghiệm thu đề tài</a></li>
-                    </ul>
+                  <li><a href="hoidong.php?controller=hoidongnghiemthu"><i class="fa fa-desktop"></i> Hội đồng nghiệm thu đề tài</a>
                   </li>
                   
                 

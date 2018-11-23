@@ -27,9 +27,11 @@
 			foreach ($listPoint as $key) {
 				$fk_khoanmucdiem_id = $key["pk_khoanmucdiem_id"];
 				$diem_chu_tich = $key["diem_chu_tich"];
+				$diem_uy_vien_1 = $key["diem_uy_vien_1"];
+				$diem_uy_vien_2 = $key["diem_uy_vien_2"];
 				$diem_phan_bien_1 = $key["diem_phan_bien_1"];
 				$diem_phan_bien_2 = $key["diem_phan_bien_2"];
-				$model->execute("INSERT INTO tbl_diem_phieucham SET fk_user_id='{$fk_user_id}', fk_detai_phieucham_id='{$fk_detai_phieucham_id}', fk_khoanmucdiem_id='{$fk_khoanmucdiem_id}', diem_chu_tich='{$diem_chu_tich}', diem_phan_bien_1='{$diem_phan_bien_1}', diem_phan_bien_2='{$diem_phan_bien_2}'");
+				$model->execute("INSERT INTO tbl_diem_phieucham SET fk_user_id='{$fk_user_id}', fk_detai_phieucham_id='{$fk_detai_phieucham_id}', fk_khoanmucdiem_id='{$fk_khoanmucdiem_id}', diem_chu_tich='{$diem_chu_tich}',diem_uy_vien_1='{$diem_uy_vien_1}',diem_uy_vien_2='{$diem_uy_vien_2}' ,diem_phan_bien_1='{$diem_phan_bien_1}', diem_phan_bien_2='{$diem_phan_bien_2}'");
 			}
 			$model->execute("UPDATE `tbl_detai` SET c_trangthai = c_trangthai+1 WHERE pk_madetai_id =".$fk_madetai_id);
 			echo '{"result":"OKE!"}';

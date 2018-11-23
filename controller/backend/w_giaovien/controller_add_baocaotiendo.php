@@ -19,13 +19,12 @@
 				case "do_add":
 					$fk_madetai_id = $_POST["fk_madetai_id"];
 					//$fk_mabomon_id = $_POST["fk_mabomon_id"];
-					$c_tungay = $_POST["c_tungay"];
-					$c_denngay = $_POST["c_denngay"];
+				
 					$c_noidungtiendo = $_POST["c_noidungtiendo"];
 					$c_hoanthanhtiendo = $_POST["c_hoanthanhtiendo"];
 					$c_ghichu = $_POST["c_ghichu"];
 
-					$this->model->execute("insert into tbl_tiendo set fk_madetai_id='$fk_madetai_id', c_tungay='$c_tungay',c_denngay='$c_denngay',c_noidungtiendo='$c_noidungtiendo', c_hoanthanhtiendo='$c_hoanthanhtiendo', c_ghichu='$c_ghichu'");
+					$this->model->execute("insert into tbl_tiendo set fk_madetai_id='$fk_madetai_id',c_noidungtiendo='$c_noidungtiendo', c_hoanthanhtiendo='$c_hoanthanhtiendo', c_ghichu='$c_ghichu'");
 					//di chuyen den trang 
 					header("location:giaovien.php?controller=baocaotiendo");
 				break;

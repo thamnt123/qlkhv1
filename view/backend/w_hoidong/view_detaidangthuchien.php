@@ -88,18 +88,15 @@
                           echo "Đề tài bị hủy";
                       ?>  
                     </td>
-
                     <td class=" last">
-                      <a href="hoidong.php?controller=detaidangthuchien&<?php echo "act=hoanthanh&id=".$rows->pk_madetai_id ?>">
+                     <!--  <a href="hoidong.php?controller=detaidangthuchien&<?php //echo "act=hoanthanh&id=".$rows->pk_madetai_id ?>">
                           <button  type="button" class="btn btn-default btn-xs btn-duyet">Hoàn thành</button>
-                      </a>
+                      </a> -->
                       <a href="hoidong.php?controller=detaidangthuchien&<?php echo "act=huy&id=".$rows->pk_madetai_id ?>">
                           <button  type="button" class="btn btn-default btn-xs btn-duyet">Hủy</button>
                       </a>
                       <button type="button" class="btn btn-default btn-xs"><a href="hoidong.php?controller=chitiet_detaidangthuchien&act=xem&id=<?php echo $rows->pk_madetai_id; ?>">Xem chi tiết</a></button>
                     </td>
-                    
-                  
                   </tr>
                 <?php endforeach; ?>
                 </tbody>

@@ -7,8 +7,19 @@
 			//---------
 			//phan trang
 			//quy dinh so ban ghi hien thi tren mot trang
+			//$id=isset($_GET['id'])?$_GET['id']:0;
+			//$id = isset($_GET["id"])&&is_numeric($_GET["id"]) ? $_GET["id"] : 0;
+			$classB =0;
+			if(isset($_GET["classB"])){
+				$classB = $_GET["classB"];
+			}
+			if(isset($_POST['Process'])){
+				$classB =  $_POST['bomon'];
+			}
+
 			$record_per_page = 10;
 			//tinh tong so ban ghi
+			// $total = $this->model->num_rows("select pk_user_id from tbl_user".($classB!=0 ? " and fk_mabomon_id in($classB) " : ""));
 			$total = $this->model->num_rows("select pk_user_id from tbl_user");
 			//tinh so trang
 			$num_page = ceil($total/$record_per_page);

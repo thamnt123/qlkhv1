@@ -68,9 +68,39 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <div>
-				<a href="admin.php?controller=add_edit_user&act=add" class="btn btn-primary">Add</a>
-			</div>
+
+             <div class="control-label col-md-0 col-sm-1 col-xs-12">
+                <a href="admin.php?controller=add_edit_user&act=add" class="btn btn-primary">Add</a>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" action="<?php //echo $form_action; ?>">
+              <!-- lọc bộ môn -->
+              <div class="control-label col-md-0 col-sm-1 col-xs-12">Bộ môn:</div>
+              <div class="col-md-4 col-sm-4 col-xs-12" >
+                <select class="form-control" name="bomon" id="bomon">
+                
+                  <option value="0">Tất cả</option>
+                   <?php 
+                      // $mabomonn = "";
+                      // if(isset($_GET['classB'])){
+                      //   $mabomonn = $_GET['classB'];
+                      // }else{
+                      //    $mabomonn = $classB;
+                      // }
+                      $bomon = $this->model->get_all("select * from tbl_bomon order by pk_mabomon_id desc");
+                      foreach($bomon as $rows):
+                     ?>
+                    <option <?php if(isset($rows->pk_mabomon_id)&&$rows->pk_mabomon_id==$classB): ?> selected <?php endif; ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
+                    <?php endforeach; ?>
+                </select>
+              </div>
+              <!-- end lọc bộ môn -->
+              <div class="control-label col-md-0 col-sm-1 col-xs-12" >
+                <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
+              </div>
+            </form>
+           
+
             <div class="clearfix"></div>
           </div>
 

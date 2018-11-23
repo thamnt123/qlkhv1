@@ -21,6 +21,8 @@
 					//echo '<script>$(function(){console.log('.$_POST['objReturn'].');alert("ok");});</script>';
 					$fk_madetai_id = $_POST["fk_madetai_id"];
 					$diem_chu_tich = $_POST["diem_chu_tich"];
+					$diem_uy_vien_1 = $_POST["diem_uy_vien_1"];
+					$diem_uy_vien_2 = $_POST["diem_uy_vien_2"];
 					$diem_phan_bien_1 = $_POST["diem_phan_bien_1"];
 					$diem_phan_bien_2 = $_POST["diem_phan_bien_2"];
 					$ngay_hop = $_POST["ngay_hop"];
@@ -29,7 +31,7 @@
 					$ghi_chu = $_POST["ghi_chu"];
 					$xep_loai = $_POST["xep_loai"];
 
-					$this->model->execute("insert into tbl_detai_phieucham set fk_madetai_id=$fk_madetai_id,diem_chu_tich=$diem_chu_tich, diem_phan_bien_1=$diem_phan_bien_1, diem_phan_bien_2=$diem_phan_bien_2, y_kien='$y_kien', ghi_chu='$ghi_chu', xep_loai=$xep_loai, ngay_hop='$ngay_hop', dia_diem='$dia_diem'");
+					$this->model->execute("insert into tbl_detai_phieucham set fk_madetai_id=$fk_madetai_id,diem_chu_tich=$diem_chu_tich, diem_uy_vien_1=$diem_uy_vien_1, diem_uy_vien_2=$diem_uy_vien_2,diem_phan_bien_1=$diem_phan_bien_1, diem_phan_bien_2=$diem_phan_bien_2, y_kien='$y_kien', ghi_chu='$ghi_chu', xep_loai=$xep_loai, ngay_hop='$ngay_hop', dia_diem='$dia_diem'");
 					//di chuyen den trang 
 					header("location:hoidong.php?controller=phieuchamdetai");
 				break;

@@ -1,5 +1,5 @@
 <?php 
-	class controller_detaichoxetduyet{
+	class controller_theodoidetai{
 		public $model;
 		public function __construct(){
 			$this->model = new model();
@@ -16,21 +16,21 @@
 				
 				$classB =  $_POST['bomon'];
 			}
-			$form_action = "admin.php?controller=detaichoxetduyet&act=xem&id=$id";
+			$form_action = "admin.php?controller=theodoidetai&act=xem&id=$id";
 			switch($act){
 				case "duyet":
 					//lay 1 ban ghi truong ung voi id truyen vao
 					$rs = $this->model->execute("UPDATE `tbl_detai` SET c_trangthai = c_trangthai+1 WHERE pk_madetai_id = ".$_GET["id"]);
 					//load view
-					include "view/backend/view_detaichoxetduyet.php";
-					header("location:admin.php?controller=detaichoxetduyet");
+					include "view/backend/view_theodoidetai.php";
+					header("location:admin.php?controller=theodoidetai");
 				break;
 				case "huy":
 					//lay 1 ban ghi truong ung voi id truyen vao
 					$rs = $this->model->execute("UPDATE `tbl_detai` SET c_trangthai = 4 WHERE pk_madetai_id = ".$_GET["id"]);
 					//load view
-					include "view/backend/view_detaichoxetduyet.php";
-					header("location:admin.php?controller=detaichoxetduyet");
+					include "view/backend/view_theodoidetai.php";
+					header("location:admin.php?controller=theodoidetai");
 				break;
 				default:
 			
@@ -38,7 +38,7 @@
 					//quy dinh so ban ghi hien thi tren mot trang
 					$record_per_page = 5;
 					//tinh tong so ban ghi
-					$total = $this->model->num_rows("select dt.pk_madetai_id from tbl_user u join tbl_detai dt on u.pk_user_id = dt.fk_user_id where dt.c_trangthai in (1) ".($classB!=0 ? " and u.fk_mabomon_id in($classB) " : ""));
+					$total = $this->model->num_rows("select dt.pk_madetai_id from tbl_user u join tbl_detai dt on u.pk_user_id = dt.fk_user_id where dt.c_trangthai in (0,1) ".($classB!=0 ? " and u.fk_mabomon_id in($classB) " : ""));
 					//tinh so trang
 					$num_page = ceil($total/$record_per_page);
 					//lay bien p truyen tu url, bien nay se chi trang hien tai
@@ -47,14 +47,14 @@
 					$from = $p * $record_per_page;			
 					//---------
 					//lay toan bo ban ghi co phan trang
-					$arr = $this->model->get_all("select * from tbl_user u join tbl_detai dt on u.pk_user_id = dt.fk_user_id where dt.c_trangthai in (1) ".($classB!=0 ? " and u.fk_mabomon_id in($classB) " : "")." order by pk_madetai_id desc limit $from,$record_per_page");
+					$arr = $this->model->get_all("select * from tbl_user u join tbl_detai dt on u.pk_user_id = dt.fk_user_id where dt.c_trangthai in (0,1) ".($classB!=0 ? " and u.fk_mabomon_id in($classB) " : "")." order by pk_madetai_id desc limit $from,$record_per_page");
 					//load view
-					include "view/backend/view_detaichoxetduyet.php";
+					include "view/backend/view_theodoidetai.php";
 				break;
 			}
 			
 			
 		}	
 	}
-	new controller_detaichoxetduyet();
+	new controller_theodoidetai();
  ?>
