@@ -264,7 +264,7 @@
                    <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-                          <button class="btn btn-primary" type="button"><a href="truongbomon.php?controller=phieuchamdetai" style="color: white;">Cancel</a></button>
+                          <button class="btn btn-primary" type="button"><a href="admin.php?controller=phieuchamdetai" style="color: white;">Cancel</a></button>
                         </div>
                       </div>
             </div>

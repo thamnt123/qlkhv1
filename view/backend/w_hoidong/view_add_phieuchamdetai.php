@@ -442,6 +442,8 @@
         }
     });
     tong/=count;
+    tong=tong.toFixed(2);
+    $('#diemTrungBinh').val(tong);
     
     if(tong<=100 && tong >=81){
       tong = 'Xuất sắc';
@@ -523,6 +525,7 @@
       xepLoai: $('#xepLoai').val(),
       ngayHop: $('#ngayHop').val(),
       diaDiem: $('#diaDiem').val(),
+      diemTrungBinh: $('#diemTrungBinh').val()?parseFloat($('#diemTrungBinh').val()):0,
       deTaiDungHan : $('input[name="gender"]:checked').val(),
       fk_madetai_id: $('select[name="fk_madetai_id"]').val(),
       listPoint : listPoint
@@ -536,7 +539,7 @@
         data: objReturn,
         success: function(data){
           debugger
-          if(data.result === "OKE!"){
+          if(data.result == "OKE!"){
             alert("Thêm mới thành công!");
             location.href = "hoidong.php?controller=phieuchamdetai";
           }else{

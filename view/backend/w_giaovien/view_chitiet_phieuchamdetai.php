@@ -46,7 +46,7 @@
                       <div class="form-group">
                         <?php 
                           $ngay_hop = explode("-", $record->ngay_hop);
-                          $ngay_hop = $ngay_hop[2]."-".$ngay_hop[1]."-".$ngay_hop[0];
+                          $ngay_hop = $ngay_hop[2]."/".$ngay_hop[1]."/".$ngay_hop[0];
                           $hoi_dong = $this->model->get_all("select * from tbl_detai dt join tbl_hoidongnghiemthu hd on hd.fk_madetai_id = dt.pk_madetai_id join tbl_hoidong_detai hddt on hddt.fk_hoidongnghiemthu_id = hd.pk_hoidongnghiemthu_id join tbl_vaitro vt on hddt.fk_vaitro_id = vt.pk_vaitro_id join tbl_user u on hddt.fk_user_id = u.pk_user_id where dt.pk_madetai_id=".$record->pk_madetai_id);
                         ?>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12" >Ngày họp 
@@ -112,6 +112,8 @@
                     <th class="column-title" >Điểm đánh giá </th>
                     <th class="column-title" >Điểm đánh giá </th>
                     <th class="column-title" >Điểm đánh giá </th>
+                    <th class="column-title" >Điểm đánh giá </th>
+                    <th class="column-title" >Điểm đánh giá </th>
                   </tr>
 
                    <tr class="headings"> 
@@ -119,6 +121,8 @@
                       <td></td>
                       <td></td>
                       <td>Chủ tịch</td>
+                      <td>Ủy viên 1</td>
+                      <td>Ủy viên 2</td>
                       <td>Phản biện 1</td>
                       <td>Phản biện 2</td>
                     </tr>
@@ -127,6 +131,8 @@
                   <?php 
                     $index = 0;
                     $tong_diem_chu_tich=0;
+                    $tong_diem_uy_vien_1=0;
+                    $tong_diem_uy_vien_2=0;
                     $tong_diem_phan_bien_1=0;
                     $tong_diem_phan_bien_2=0;
                   ?>
@@ -134,6 +140,8 @@
                 <?php foreach($arr as $rows): ?>
                   <?php 
                       $tong_diem_chu_tich+=$rows->diem_chu_tich;
+                      $tong_diem_uy_vien_1+=$rows->diem_uy_vien_1;
+                      $tong_diem_uy_vien_2+=$rows->diem_uy_vien_2;
                       $tong_diem_phan_bien_1+=$rows->diem_phan_bien_1;
                       $tong_diem_phan_bien_2+=$rows->diem_phan_bien_2;
                    ?>
@@ -143,6 +151,12 @@
                     <td class=" " style="font-weight: bold;"><?=$rows->c_diemtoida?></td>
                     <td class=" " style="font-weight: bold;">
                       <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_chu_tich" value="<?=$rows->diem_chu_tich?>" readonly>
+                    </td>
+                     <td class=" " style="font-weight: bold;">
+                      <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_uy_vien_1" value="<?=$rows->diem_uy_vien_1?>" readonly>
+                    </td>
+                    <td class=" " style="font-weight: bold;">
+                      <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_uy_vien_2" value="<?=$rows->diem_uy_vien_2?>" readonly>
                     </td>
                     <td class=" " style="font-weight: bold;">
                       <input id="parent_<?=$rows->pk_khoanmucdiem_id?>" parent="0" type="text" class="form-control diem_phan_bien_1" value="<?=$rows->diem_phan_bien_1?>" readonly>
@@ -160,6 +174,12 @@
                     <td class=" "><?php echo $rows1->c_tenkhoanmuc; ?></td>
                     <td class=" "><?=$rows1->c_diemtoida?></td>
                     <td class=" "><input parent="<?=$rows1->parentId?>" type="text" class="form-control diem_chu_tich" value="<?=$rows1->diem_chu_tich?>" readonly></td>
+                     <td class=" ">
+                      <input parent="<?=$rows1->parentId?>" type="text" class="form-control diem_uy_vien_1" value="<?=$rows1->diem_uy_vien_1?>" readonly>
+                    </td>
+                     <td class=" ">
+                      <input parent="<?=$rows1->parentId?>" type="text" class="form-control diem_uy_vien_2" value="<?=$rows1->diem_uy_vien_2?>" readonly>
+                    </td>
                     <td class=" "><input parent="<?=$rows1->parentId?>" type="text" class="form-control diem_phan_bien_1" value="<?=$rows1->diem_phan_bien_1?>" readonly></td>
                     <td class=" ">
                       <input parent="<?=$rows1->parentId?>" type="text" class="form-control diem_phan_bien_2" value="<?=$rows1->diem_phan_bien_2?>" readonly>
@@ -177,13 +197,19 @@
                 <div class="form-group">
                   <label class="control-label col-md-1 col-sm-1 col-xs-12" style="margin-left: 105px;">Tổng 
                   </label>
-                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 208px;">
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 160px;">
                     <input id="tong_diem_chu_tich" onchange="" type="text"  value="<?=$tong_diem_chu_tich?>" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
-                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 120px;">
+                   <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 47px;">
+                    <input id="tong_diem_uy_vien_1" onchange="" type="text" value="<?=$tong_diem_uy_vien_1?>" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 47px;">
+                    <input id="tong_diem_uy_vien_2" onchange="" type="text" value="<?=$tong_diem_uy_vien_2?>" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 47px;">
                     <input id="tong_diem_phan_bien_1" onchange="" type="text" value="<?=$tong_diem_phan_bien_1?>" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
-                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 120px;">
+                  <div class="col-md-1 col-sm-1 col-xs-12" style="margin-left: 47px;">
                     <input id="tong_diem_phan_bien_2" onchange="" type="text" value="<?=$tong_diem_phan_bien_2?>" class="form-control col-md-4 col-xs-12 tongdiem1" readonly="" >  
                   </div>
                 </div>
@@ -200,6 +226,13 @@
                       <input type="text" name="" value="<?php echo isset($record->ghi_chu)?$record->ghi_chu:""; ?>" required class="form-control col-md-7 col-xs-12" id="ghiChu"> 
                     </div>
                   </div> -->
+                  <div class="form-group">
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12" >Điểm trung bình 
+                      </label>
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input class="form-control col-md-4 col-xs-12" type="text" id="diemTrungBinh" readonly=""> 
+                      </div>
+                  </div>
                   <div class="form-group">
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" >Xếp loại <span class="required">*</span>
                       </label>
@@ -252,7 +285,7 @@
   </div>
 </div>
 <!-- /page content -->
-</script>
+<!-- </script>
 <script type="text/javascript">
   function tinhDiemChung(){
     //Tinh tong diem chu tich
@@ -452,4 +485,4 @@
     
   });
   
-</script>
+</script> -->

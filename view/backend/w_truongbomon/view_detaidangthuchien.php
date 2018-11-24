@@ -64,11 +64,8 @@
 
                       <?php 
                         $item = $this->model->get_a_record(" select * from tbl_user where pk_user_id =".$rows->fk_user_id);  
-                      
-                      
                       echo (isset($item)&&$item != null && (isset($item->c_fullname))?$item->c_fullname:""); 
                       ?>
-
                     </td>
                    
                     <td class=" "><?php echo $rows->c_kinhphi; ?></td>
@@ -97,12 +94,7 @@
                     </td>
 
                     <td class=" last">
-                      <a href="hoidong.php?controller=detaidangthuchien&<?php echo "act=hoanthanh&id=".$rows->pk_madetai_id ?>">
-                          <button  type="button" class="btn btn-default btn-xs btn-duyet">Hoàn thành</button>
-                      </a>
-                      <a href="hoidong.php?controller=detaidangthuchien&<?php echo "act=huy&id=".$rows->pk_madetai_id ?>">
-                          <button  type="button" class="btn btn-default btn-xs btn-duyet">Hủy</button>
-                      </a>
+                     
                       
                       <button type="button" class="btn btn-default btn-xs"><a href="truongbomon.php?controller=chitiet_detaidangthuchien&act=xem&id=<?php echo $rows->pk_madetai_id; ?>">Xem chi tiết</a></button>
                     </td>

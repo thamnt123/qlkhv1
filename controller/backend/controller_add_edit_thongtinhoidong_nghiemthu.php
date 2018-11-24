@@ -10,7 +10,7 @@
 			if(isset($_GET["id"])){
 				$_SESSION['ID_HOIDONG_DT'] = $_GET["id"];
 			}	
-			$id_hd_dt = $_SESSION['ID_HOIDONG_DT'];
+			$id_hd_dt = isset($_SESSION['ID_HOIDONG_DT'])?$_SESSION['ID_HOIDONG_DT']:0;
 			$fk_hoidongnghiemthu_id = $_SESSION["ID_HOIDONG"];
 			if(isset($_GET["fk_mabomon_id"])){
 				$id=0;

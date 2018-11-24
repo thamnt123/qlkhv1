@@ -6,7 +6,22 @@
 			//---------
 			//phan trang
 			//quy dinh so ban ghi hien thi tren mot trang
+			$id=isset($_GET['id'])?$_GET['id']:0;
+			$id = isset($_GET["id"])&&is_numeric($_GET["id"]) ? $_GET["id"] : 0;
 			$record_per_page = 5;
+			$year = date("Y");
+			$classB =0;
+			if(isset($_GET["year"])){
+				$year = $_GET["year"];
+			}
+			if(isset($_GET["classB"])){
+				$classB = $_GET["classB"];
+			}
+			if(isset($_POST['Process'])){
+				$year = $_POST['nam'];
+				$classB =  $_POST['bomon'];
+			}
+			// $form_action = "admin.php?controller=hoidongnghiemthu&act=xem&id=$id";
 			//tinh tong so ban ghi
 			$total = $this->model->num_rows("select pk_hoidongnghiemthu_id from tbl_hoidongnghiemthu");
 			//tinh so trang

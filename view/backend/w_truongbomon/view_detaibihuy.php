@@ -33,7 +33,7 @@
                     </th>
                     <th class="column-title">Tên đề tài </th>
                     <th class="column-title">Bộ môn </th>
-                    <th class="column-title">Chủ nhiệm đề tài </th>
+                    <th class="column-title">Chủ nhiệm</br> đề tài </th>
                     <th class="column-title">Nội dung nghiên cứu </th>
                     <th class="column-title">Kinh phí </th>
                     <th class="column-title">Từ ngày </th>
@@ -63,8 +63,6 @@
 
                       <?php 
                         $item = $this->model->get_a_record(" select * from tbl_user where pk_user_id =".$rows->fk_user_id);  
-                      
-                      
                       echo (isset($item)&&$item != null && (isset($item->c_fullname))?$item->c_fullname:""); 
                       ?>
 

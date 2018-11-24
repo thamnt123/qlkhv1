@@ -20,7 +20,7 @@
 			$record_per_page = 10;
 			//tinh tong so ban ghi
 			// $total = $this->model->num_rows("select pk_user_id from tbl_user".($classB!=0 ? " and fk_mabomon_id in($classB) " : ""));
-			$total = $this->model->num_rows("select pk_user_id from tbl_user");
+			$total = $this->model->num_rows("select pk_user_id from tbl_user where 1=1 ".(isset($_GET['fk_mabomon_id'])&&$_GET['fk_mabomon_id']>0?" and fk_mabomon_id=".($_GET['fk_mabomon_id']):""));
 			//tinh so trang
 			$num_page = ceil($total/$record_per_page);
 			//lay bien p truyen tu url, bien nay se chi trang hien tai
@@ -29,7 +29,7 @@
 			$from = $p * $record_per_page;			
 			//---------
 			//lay toan bo ban ghi co phan trang
-			$arr = $this->model->get_all("select * from tbl_user order by pk_user_id desc limit $from,$record_per_page");
+			$arr = $this->model->get_all("select * from tbl_user where 1=1 ".(isset($_GET['fk_mabomon_id'])&&$_GET['fk_mabomon_id']>0?" and fk_mabomon_id=".($_GET['fk_mabomon_id']):"")." order by pk_user_id desc limit $from,$record_per_page");
 			//load view
 			include "view/backend/view_user.php";
 		}

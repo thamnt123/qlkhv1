@@ -63,10 +63,8 @@
                     </td>
                     <td class=" ">
 
-                      <?php 
-                        $item = $this->model->get_a_record(" select * from tbl_user where pk_user_id =".$rows->fk_user_id);  
-                      
-                      
+                       <?php 
+                        $item = $this->model->get_a_record(" select * from tbl_user where pk_user_id =".$rows->pk_user_id);  
                       echo (isset($item)&&$item != null && (isset($item->c_fullname))?$item->c_fullname:""); 
                       ?>
 

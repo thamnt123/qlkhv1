@@ -89,15 +89,20 @@
                       // }
                       $bomon = $this->model->get_all("select * from tbl_bomon order by pk_mabomon_id desc");
                       foreach($bomon as $rows):
+                        $flag=isset($rows->pk_mabomon_id)&&$rows->pk_mabomon_id==$classB;
+                        
+                        if(isset($_GET['fk_mabomon_id'])){
+                          $flag= $rows->pk_mabomon_id==$_GET['fk_mabomon_id'];
+                        }
                      ?>
-                    <option <?php if(isset($rows->pk_mabomon_id)&&$rows->pk_mabomon_id==$classB): ?> selected <?php endif; ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
+                    <option <?php if($flag): ?> selected <?php endif; ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
                     <?php endforeach; ?>
                 </select>
               </div>
               <!-- end lọc bộ môn -->
-              <div class="control-label col-md-0 col-sm-1 col-xs-12" >
+              <!-- <div class="control-label col-md-0 col-sm-1 col-xs-12" >
                 <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
-              </div>
+              </div> -->
             </form>
            
 
@@ -222,3 +227,35 @@
   </div>
 </div>
 <!-- /page content -->
+<script type="text/javascript">
+  function URL_add_parameter(url, param, value){
+    var hash       = {};
+    var parser     = document.createElement('a');
+
+    parser.href    = url;
+
+    var parameters = parser.search.split(/\?|&/);
+
+    for(var i=0; i < parameters.length; i++) {
+        if(!parameters[i])
+            continue;
+
+        var ary      = parameters[i].split('=');
+        hash[ary[0]] = ary[1];
+    }
+
+    hash[param] = value;
+
+    var list = [];  
+    Object.keys(hash).forEach(function (key) {
+        list.push(key + '=' + hash[key]);
+    });
+
+    parser.search = '?' + list.join('&');
+    return parser.href;
+  }
+  $('select.form-control[name="bomon"]').on('change',function(){
+      //console.log($(this).val());
+      window.location.href = URL_add_parameter(window.location.href,'fk_mabomon_id',$(this).val());
+    });
+</script>
