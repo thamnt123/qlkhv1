@@ -9,30 +9,7 @@
       <div class="clearfix"></div>
 
        <form method="post" enctype="multipart/form-data" action="<?php echo $form_action; ?>">
-        <div class="control-label col-md-0 col-sm-1 col-xs-12">Chọn năm:</div>
-        <div class="col-md-3 col-sm-3 col-xs-12" >
-          <select class="form-control" name="nam" id="nam">
-            <option value="0">Tất cả</option>
-            <?php 
-              //$selected = isset($year)?$year:date("Y");
-              // if(isset($year)){
-              //   $selected = $year;
-              // }else if(isset($_GET['year'])){
-              //    $selected = $_GET['year'];
-              // }else{
-              //    $selected = date("Y");
-              // }
-              $nam = $this->model->get_all("select * from tbl_nam order by pk_nam_id desc");
-              foreach($nam as $rows):
-                $flag=isset($rows->c_nam)&&$rows->c_nam==date("Y");
-                if(isset($_GET['yearFil'])){
-                  $flag = $rows->c_nam==$_GET['yearFil'];
-                }
-             ?>
-            <option <?php if($flag): ?> selected <?php endif; ?> value="<?php echo $rows->c_nam; ?>"><?php echo $rows->c_nam; ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
+       
          <!-- lọc bộ môn -->
         <div class="control-label col-md-0 col-sm-1 col-xs-12">Bộ môn:</div>
         <div class="col-md-4 col-sm-4 col-xs-12" >
@@ -56,6 +33,30 @@
                ?>
               <option <?php if($flag): ?> selected <?php endif; ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
               <?php endforeach; ?>
+          </select>
+        </div>
+         <div class="control-label col-md-0 col-sm-1 col-xs-12">Chọn năm:</div>
+        <div class="col-md-3 col-sm-3 col-xs-12" >
+          <select class="form-control" name="nam" id="nam">
+            <option value="0">Tất cả</option>
+            <?php 
+              //$selected = isset($year)?$year:date("Y");
+              // if(isset($year)){
+              //   $selected = $year;
+              // }else if(isset($_GET['year'])){
+              //    $selected = $_GET['year'];
+              // }else{
+              //    $selected = date("Y");
+              // }
+              $nam = $this->model->get_all("select * from tbl_nam order by pk_nam_id desc");
+              foreach($nam as $rows):
+                $flag=isset($rows->c_nam)&&$rows->c_nam==date("Y");
+                if(isset($_GET['yearFil'])){
+                  $flag = $rows->c_nam==$_GET['yearFil'];
+                }
+             ?>
+            <option <?php if($flag): ?> selected <?php endif; ?> value="<?php echo $rows->c_nam; ?>"><?php echo $rows->c_nam; ?></option>
+            <?php endforeach; ?>
           </select>
         </div>
         <!-- end lọc bộ môn -->

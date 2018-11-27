@@ -8,7 +8,7 @@
 			//quy dinh so ban ghi hien thi tren mot trang
 			$id=isset($_GET['id'])?$_GET['id']:0;
 			$id = isset($_GET["id"])&&is_numeric($_GET["id"]) ? $_GET["id"] : 0;
-			$record_per_page = 1;
+			$record_per_page = 10;
 			$year = date("Y");
 			
 			if(isset($_GET["year"])){

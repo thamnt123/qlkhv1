@@ -236,7 +236,7 @@
                   <div class="form-group">
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" >Xếp loại <span class="required">*</span>
                       </label>
-                      <div class="col-md-5 col-sm-5 col-xs-12">
+                      <div class="col-md-3 col-sm-3 col-xs-12">
                         <input class="form-control col-md-4 col-xs-12" type="text" id="xepLoai" value="<?=$record->xep_loai?>" readonly=""> 
                       </div>
                   </div>

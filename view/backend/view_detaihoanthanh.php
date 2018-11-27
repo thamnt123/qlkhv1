@@ -65,6 +65,7 @@
           <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
         </div>
       </form>
+      
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
