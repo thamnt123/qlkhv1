@@ -30,9 +30,6 @@
             <?php endforeach; ?>
           </select>
         </div>
-        <div class="control-label col-md-0 col-sm-1 col-xs-12" >
-          <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
-        </div>
       </form>
       
       <div class="title_right">
@@ -140,6 +137,12 @@
               parser.search = '?' + list.join('&');
               return parser.href;
             }
+            $('select.form-control[name="nam"]').on('change',function(){
+                //console.log($(this).val());
+                var url=URL_add_parameter(window.location.href,'p',0);
+                window.location.href = URL_add_parameter(url,'year',$(this).val());
+
+            });
           </script>
 
           </ul>

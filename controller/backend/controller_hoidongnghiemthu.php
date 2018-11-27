@@ -23,7 +23,7 @@
 			}
 			$form_action = "admin.php?controller=hoidongnghiemthu&act=xem&id=$id";
 			//tinh tong so ban ghi
-			$total = $this->model->num_rows("select pk_hoidongnghiemthu_id from tbl_hoidongnghiemthu");
+			$total = $this->model->num_rows("select hd.pk_hoidongnghiemthu_id from tbl_hoidongnghiemthu hd join tbl_detai dt on dt.pk_madetai_id=hd.fk_madetai_id join tbl_user u on u.pk_user_id = dt.fk_user_id where 1=1 ".($year!=0?" and year(hd.c_ngaybaove) = $year ":"").($classB!=0 ? " and u.fk_mabomon_id = $classB " : ""));
 			//tinh so trang
 			$num_page = ceil($total/$record_per_page);
 			//lay bien p truyen tu url, bien nay se chi trang hien tai
@@ -32,7 +32,7 @@
 			$from = $p * $record_per_page;			
 			//---------
 			//lay toan bo ban ghi co phan trang
-			$arr = $this->model->get_all("select * from tbl_hoidongnghiemthu order by pk_hoidongnghiemthu_id desc limit $from,$record_per_page");
+			$arr = $this->model->get_all("select * from tbl_hoidongnghiemthu hd join tbl_detai dt on dt.pk_madetai_id=hd.fk_madetai_id join tbl_user u on u.pk_user_id = dt.fk_user_id where 1=1 ".($year!=0?" and year(hd.c_ngaybaove) in($year) ":"").($classB!=0 ? " and u.fk_mabomon_id in($classB) " : "")." order by pk_hoidongnghiemthu_id desc limit $from,$record_per_page");
 			//load view
 			include "view/backend/view_hoidongnghiemthu.php";
 		}

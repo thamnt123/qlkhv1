@@ -161,7 +161,7 @@
               var bomonn = $("#bomon").val();
               var hdrf = URL_add_parameter($(el).attr('href'),'year',namm);
               $(el).attr('href',URL_add_parameter(hdrf,'classB',bomonn));
-              
+
               //alert($('#btn_xemchitiet').attr('href'));
             }
             function URL_add_parameter(url, param, value){

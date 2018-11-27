@@ -129,20 +129,37 @@
           <ul class="pagination">
             <li class="page-item"><a class="page-link" href="#">Trang</a></li>
           <?php for($i=1; $i<=$num_page; $i++): ?>  
-            <li class="page-item"><a class="page-link" href="admin.php?controller=phieuchamdetai&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <li class="page-item"><a class="page-link" onclick="phanTrang(this);" href="admin.php?controller=phieuchamdetai&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
           <?php endfor; ?>
           </ul>
         </div>
       <!-- end phân trang -->
-            
-           
+
             </div>
+            <!-- export -->
+            <div class="outer-container">
+              <form target="_blank" action="view/backend/Export.php" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                  <div>
+                    <button type="submit" id="export" name="export" class="btn-submit">Export</button>
+                  </div>
+              </form>
+            </div>
+           <!-- export -->
           </div>
         </div>
       </div>
-    </div>
+    
+     <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
   </div>
 </div>
+
+
 <!-- /page content -->
 
 <script type="text/javascript">
@@ -174,12 +191,22 @@
   }
   $('select.form-control[name="bomon"]').on('change',function(){
       //console.log($(this).val());
-      window.location.href = URL_add_parameter(window.location.href,'fk_mabomon_id',$(this).val());
+      var url=URL_add_parameter(window.location.href,'p',0);
+      window.location.href = URL_add_parameter(url,'fk_mabomon_id',$(this).val());
     });
   $('select.form-control[name="nam"]').on('change',function(){
       //console.log($(this).val());
-      window.location.href = URL_add_parameter(window.location.href,'yearFil',$(this).val());
+      var url=URL_add_parameter(window.location.href,'p',0);
+      window.location.href = URL_add_parameter(url,'yearFil',$(this).val());
     });
+  function phanTrang(el){
+    var namm = $('select.form-control[name="nam"]').val();
+    var bomonn = $('select.form-control[name="bomon"]').val();
+    var hdrf = URL_add_parameter($(el).attr('href'),'yearFil',namm);
+    $(el).attr('href',URL_add_parameter(hdrf,'fk_mabomon_id',bomonn));
+    
+    //alert($('#btn_xemchitiet').attr('href'));
+  }
 </script>
 
 

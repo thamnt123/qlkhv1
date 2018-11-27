@@ -207,7 +207,7 @@
 					<ul class="pagination">
 						<li class="page-item"><a class="page-link" href="#">Trang</a></li>
 					<?php for($i=1; $i<=$num_page; $i++): ?>	
-						<li class="page-item"><a class="page-link" href="admin.php?controller=user&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+						<li class="page-item"><a class="page-link" onclick="phanTrang(this);" href="admin.php?controller=user&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
 					<?php endfor; ?>
 					</ul>
 				</div>
@@ -256,6 +256,14 @@
   }
   $('select.form-control[name="bomon"]').on('change',function(){
       //console.log($(this).val());
-      window.location.href = URL_add_parameter(window.location.href,'fk_mabomon_id',$(this).val());
-    });
+      var url=URL_add_parameter(window.location.href,'p',0);
+      window.location.href = URL_add_parameter(url,'fk_mabomon_id',$(this).val());
+
+  });
+  function phanTrang(el){
+    var bomonn = $('select.form-control[name="bomon"]').val();
+    $(el).attr('href',URL_add_parameter($(el).attr('href'),'fk_mabomon_id',bomonn));
+    
+    //alert($('#btn_xemchitiet').attr('href'));
+  }
 </script>
