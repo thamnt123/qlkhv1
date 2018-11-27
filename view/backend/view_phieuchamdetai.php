@@ -114,7 +114,7 @@
                     <td class=" "><?php echo ucfirst($rows->c_tendetai);?></td>
                     <td class=" "><?php echo $rows->c_fullname;?></td>
                     <td class=" "><?php echo $rows->c_tenbomon;?></td>
-                    <td class=" "></td>
+                    <td class=" "><?php echo $rows->diem_trung_binh;?></td>
                     <td class=" "><?php echo $rows->xep_loai;?></td>
                     <td class=" last">
                       <button type="button" class="btn btn-default btn-xs"><a href="admin.php?controller=chitiet_phieuchamdetai&act=xem&id=<?php echo $rows->pk_madetai_id; ?>">Xem chi tiết</a></button>

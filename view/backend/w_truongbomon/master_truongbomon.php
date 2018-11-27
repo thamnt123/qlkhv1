@@ -60,8 +60,8 @@
                       <li><a href="truongbomon.php?controller=detaibihuy">Đề tài bị hủy</a></li>
                     </ul>
                   </li>
-                 <li><a href="truongbomon.php?controller=xemhoidongnghiemthu"><i class="fa fa-desktop"></i> Hội đồng nghiệm thu đề tài </a>
-                  </li>
+                <!--  <li><a href="truongbomon.php?controller=xemhoidongnghiemthu"><i class="fa fa-desktop"></i> Hội đồng nghiệm thu đề tài </a>
+                  </li> -->
                    <li><a href="truongbomon.php?controller=baocaotiendo"><i class="fa fa-table"></i> Xem tiến độ đề tài </a></li>
                   <li><a href="truongbomon.php?controller=phieuchamdetai"><i class="fa fa-table"></i> Xem kết quả đề tài </a></li>
                 

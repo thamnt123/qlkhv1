@@ -23,7 +23,7 @@
               // }else{
               //    $selected = date("Y");
               // }
-              $nam = $this->model->get_all("select * from tbl_nam order by pk_nam_id desc");
+               $nam = $this->model->get_all("select * from tbl_nam order by pk_nam_id desc");
               foreach($nam as $rows):
              ?>
             <option <?php if(isset($rows->c_nam)&&$rows->c_nam==$selected): ?> selected <?php endif; ?> value="<?php echo $rows->c_nam; ?>"><?php echo $rows->c_nam; ?></option>
@@ -31,7 +31,7 @@
           </select>
         </div>
         <div class="control-label col-md-0 col-sm-1 col-xs-12" >
-          <button type="submit" name="Process" value="Process" class="btn btn-success">Submit</button>
+          <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
         </div>
 
         <div class="control-label col-sm-3 col-xs-12">Số đề tài hoàn thành quá hạn:</div>
@@ -89,7 +89,7 @@
 
                     </td>
                    
-                    <td class=" "><?php echo number_format($rows->c_kinhphi); ?> VNĐ</td>
+                    <td class=" "><?php echo $rows->c_kinhphi; ?> VNĐ</td>
                     <td class=" ">
                     	<?php 
 							           $date = date_create($rows->c_tungay);
@@ -122,22 +122,60 @@
                 </tbody>
               </table>
               <!-- phân trang -->
-	          	<div class="card-footer" style="padding:5px !important">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#">Trang</a></li>
-					<?php for($i=1; $i<=$num_page; $i++): ?>	
-						<li class="page-item"><a class="page-link" href="admin.php?controller=detaiquahan&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-					<?php endfor; ?>
-					</ul>
-				</div>
-			<!-- end phân trang -->
+              <div class="card-footer" style="padding:5px !important">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Trang</a></li>
+          <?php for($i=1; $i<=$num_page; $i++): ?>  
+            <li class="page-item"><a class="page-link" onclick="phanTrang(this)" href="admin.php?controller=detaiquahan&p=<?php echo $i; ?>" ><?php echo $i; ?></a></li>
+
+          <?php endfor; ?>
+          <script type="text/javascript">
+            function phanTrang(el){
+              debugger
+              var namm = $("#nam").val();
+              var bomonn = $("#bomon").val();
+              var hdrf = URL_add_parameter($(el).attr('href'),'year',namm);
+              $(el).attr('href',URL_add_parameter(hdrf,'classB',bomonn));
+              
+              //alert($('#btn_xemchitiet').attr('href'));
+            }
+            function URL_add_parameter(url, param, value){
+              var hash       = {};
+              var parser     = document.createElement('a');
+
+              parser.href    = url;
+
+              var parameters = parser.search.split(/\?|&/);
+
+              for(var i=0; i < parameters.length; i++) {
+                  if(!parameters[i])
+                      continue;
+
+                  var ary      = parameters[i].split('=');
+                  hash[ary[0]] = ary[1];
+              }
+
+              hash[param] = value;
+
+              var list = [];  
+              Object.keys(hash).forEach(function (key) {
+                  list.push(key + '=' + hash[key]);
+              });
+
+              parser.search = '?' + list.join('&');
+              return parser.href;
+            }
+          </script>
+
+          </ul>
+        </div>
+      <!-- end phân trang -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 <!-- /page content -->
 
 

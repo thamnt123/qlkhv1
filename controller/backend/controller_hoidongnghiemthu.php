@@ -21,7 +21,7 @@
 				$year = $_POST['nam'];
 				$classB =  $_POST['bomon'];
 			}
-			// $form_action = "admin.php?controller=hoidongnghiemthu&act=xem&id=$id";
+			$form_action = "admin.php?controller=hoidongnghiemthu&act=xem&id=$id";
 			//tinh tong so ban ghi
 			$total = $this->model->num_rows("select pk_hoidongnghiemthu_id from tbl_hoidongnghiemthu");
 			//tinh so trang

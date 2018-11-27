@@ -17,7 +17,7 @@
 				$classB =  $_POST['bomon'];
 			}
 
-			$record_per_page = 10;
+			$record_per_page = 15;
 			//tinh tong so ban ghi
 			// $total = $this->model->num_rows("select pk_user_id from tbl_user".($classB!=0 ? " and fk_mabomon_id in($classB) " : ""));
 			$total = $this->model->num_rows("select pk_user_id from tbl_user where 1=1 ".(isset($_GET['fk_mabomon_id'])&&$_GET['fk_mabomon_id']>0?" and fk_mabomon_id=".($_GET['fk_mabomon_id']):""));

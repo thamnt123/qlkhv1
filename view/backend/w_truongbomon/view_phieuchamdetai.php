@@ -66,6 +66,7 @@
                     <th class="column-title">Tên đề tài </th>
                     <th class="column-title">Chủ nhiệm đề tài </th>
                     <th class="column-title">Bộ môn </th>
+                    <th class="column-title">Điểm trung bình </th>
                     <th class="column-title">Xếp loại </th>
                     <th class="column-title">Action </th>
                     </th>
@@ -83,6 +84,7 @@
                     <td class=" "><?php echo $rows->c_tendetai;?></td>
                     <td class=" "><?php echo $rows->c_fullname;?></td>
                     <td class=" "><?php echo $rows->c_tenbomon;?></td>
+                    <td class=" "><?php echo $rows->diem_trung_binh;?></td>
                     <td class=" "><?php echo $rows->xep_loai;?></td>
                     <td class=" last">
                       <button type="button" class="btn btn-default btn-xs"><a href="truongbomon.php?controller=chitiet_phieuchamdetai&act=xem&id=<?php echo $rows->pk_madetai_id; ?>">Xem chi tiết</a></button>

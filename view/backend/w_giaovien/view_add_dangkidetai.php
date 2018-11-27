@@ -35,8 +35,29 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Kinh phí 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="c_kinhphi" value="<?php echo isset($record->c_kinhphi)?$record->c_kinhphi:""; ?>" required class="form-control col-md-7 col-xs-12">
+                          <input type="text" min="1000" step="1000" name="c_kinhphi" onchange="kinhPhiOnChange(this);" value="<?php echo isset($record->c_kinhphi)?$record->c_kinhphi:""; ?>" required class="form-control col-md-7 col-xs-12">
                         </div>
+                        <script type="text/javascript">
+                          function kinhPhiOnChange(el){
+                            var value = $(el).val();
+                            var index = 1;
+                            var result = "";
+                            debugger
+                            value = value.split('').reverse().join('');
+                            value=value.indexOf(',')==-1?value:(value.replace(/,/g,''));
+                            if(typeof parseInt(value)=="number"){
+                              while(index <= value.length){
+                                 result+=value[index-1];
+                                if(index%3==0&&index < value.length){
+                                  result+=","; 
+                                }
+                                index++;
+                              }
+                              result = result.split('').reverse().join('');
+                               $(el).val(result);
+                            }
+                          }
+                        </script>
                       </div>
 
                       <div class="form-group">
