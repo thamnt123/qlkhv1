@@ -1,9 +1,12 @@
+<?php 
+  $record = $_SESSION['SS_USER'];
+?>
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Đề tài đã thực hiện</h3>
+                <h3>Thông tin người dùng</h3>
               </div>
 
               <div class="title_right">
@@ -26,80 +29,79 @@
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" action="<?php echo $form_action; ?>">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Tên đề tài
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Họ và tên 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<input type="text" name="c_tendetai" value="<?php echo isset($record->c_tendetai)?$record->c_tendetai:""; ?>" required class="form-control col-md-7 col-xs-12" readonly>
-                        </div>
-                      </div>
-
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nội dung nghiên cứu 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<input type="text" name="c_noidungnghiencuu" value="<?php echo isset($record->c_noidungnghiencuu)?$record->c_noidungnghiencuu:""; ?>" required class="form-control col-md-7 col-xs-12" readonly>
+                          <input type="text" name="c_fullname" value="<?php echo isset($record->c_fullname)?$record->c_fullname:''; ?>" required class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 
                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Kinh phí 
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Bộ môn</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="c_kinhphi" value="<?php echo isset($record->c_kinhphi)?$record->c_kinhphi:""; ?>" required class="form-control col-md-7 col-xs-12" readonly>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Từ ngày 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="c_tungay" value="<?php echo isset($record->c_tungay)?$record->c_tungay:""; ?>" required class="form-control col-md-7 col-xs-12" readonly>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Đến ngày 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="c_denngay" value="<?php echo isset($record->c_denngay)?$record->c_denngay:""; ?>" required class="form-control col-md-7 col-xs-12" readonly>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">File mô tả 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="file_mo_ta" value="<?php echo isset($record->file_mo_ta)?$record->file_mo_ta:""; ?>" required class="form-control col-md-7 col-xs-12" readonly>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Chủ nhiệm đề tài 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <?php $item = $this->model->get_a_record("SELECT * FROM `tbl_user` where pk_user_id = $record->fk_user_id"); ?>
-                           <input type="text" name="file_mo_ta" value="<?=$item->c_fullname?>" required class="form-control col-md-7 col-xs-12" readonly>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Người thực hiện đề tài 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="select2_multiple form-control" multiple="multiple">
-                            <?php  $arr = $this->model->get_all("SELECT * FROM tbl_user u join tbl_detai_user du on u.pk_user_id = du.fk_user_id join tbl_detai dt on dt.pk_madetai_id = du.fk_madetai_id where dt.pk_madetai_id =$record->pk_madetai_id")?>
-                            <?php foreach($arr as $rows): ?>
-                            <option value="<?=$rows->pk_user_id?>" readonly><?=$rows->c_fullname?> - <?=$rows->c_email?></option>
+                          <select name="fk_mabomon_id" class="form-control col-md-7 col-xs-12">
+                            <?php 
+                              $bomon = $this->model->get_all("select * from tbl_bomon order by pk_mabomon_id desc");
+                              foreach($bomon as $rows):
+                             ?>
+                            <option <?php if(isset($record->fk_mabomon_id)&&$record->fk_mabomon_id==$rows->pk_mabomon_id): ?> selected <?php endif; ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
                             <?php endforeach; ?>
                           </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Học hàm <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="c_hocham" value="<?php echo isset($record->c_hocham)?$record->c_hocham:""; ?>" required class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Học vị <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="c_hocvi" value="<?php echo isset($record->c_hocvi)?$record->c_hocvi:""; ?>" required class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Ngày sinh
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="date" name="c_ngaysinh" value="<?php echo isset($record->c_ngaysinh)?$record->c_ngaysinh:""; ?>" required class="date-picker form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Địa chỉ
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="c_diachi" value="<?php echo isset($record->c_diachi)?$record->c_diachi:""; ?>" required class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >SĐT <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="c_sdt" value="<?php echo isset($record->c_sdt)?$record->c_sdt:""; ?>" required class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input <?php if(isset($record->c_email)) { ?> disabled <?php } ?> required type="email" name="c_email" value="<?php echo isset($record->c_email)?$record->c_email:""; ?>" class="form-control">
                         </div>
                       </div>
 
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button"><a href="giaovien.php?controller=detaidathuchien" style="color: white;">Cancel</a></button>
+                          <button class="btn btn-primary" type="button"><a href="admin.php?controller=admin" style="color: white;">Cancel</a></button>
                         </div>
                       </div>
 

@@ -95,8 +95,22 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Người thực hiện đề tài 
                         </label>
+                         <div class="col-md-5 col-sm-5 col-xs-12">
+                          <select name="thanh_vien[]" class="form-control" >
+                            <?php  $arr = $this->model->get_all("select * from tbl_user where UserType = 1 and fk_mabomon_id={$_SESSION['SS_USER']->fk_mabomon_id}");?>
+                            <?php foreach($arr as $rows): ?>
+                            <option value="<?=$rows->pk_user_id?>"><?=$rows->c_fullname?> - <?=$rows->c_email?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                        <button class="btn btn-dark" type="button"><a href="" style="color: white;">Add</a></button>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="thanh_vien[]" class="select2_multiple form-control" multiple="multiple">
+                          <select name="thanh_vien[]" class="select2_multiple form-control" multiple="multiple" readonly>
                             <?php  $arr = $this->model->get_all("select * from tbl_user where UserType = 1 and fk_mabomon_id={$_SESSION['SS_USER']->fk_mabomon_id}");?>
                             <?php foreach($arr as $rows): ?>
                             <option value="<?=$rows->pk_user_id?>"><?=$rows->c_fullname?> - <?=$rows->c_email?></option>

@@ -130,7 +130,7 @@
                     <td class=" "><?php echo $rows->c_diadiem; ?></td>
                     
                     <td class=" last">
-                    	<a href="admin.php?controller=add_edit_hoidongnghiemthu&act=edit&id=<?php echo $rows->pk_hoidongnghiemthu_id; ?>">Edit</a>&nbsp;&nbsp;
+                    	<!-- <a href="admin.php?controller=add_edit_hoidongnghiemthu&act=edit&id=<?php //echo $rows->pk_hoidongnghiemthu_id; ?>">Edit</a>&nbsp;&nbsp; -->
 						          <a onclick="return window.confirm('Are you sure?');" href="admin.php?controller=add_edit_hoidongnghiemthu&act=delete&id=<?php echo $rows->pk_hoidongnghiemthu_id; ?>">Delete</a>
                     </td>
                   </tr>

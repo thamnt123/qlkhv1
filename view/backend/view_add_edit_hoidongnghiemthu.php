@@ -44,7 +44,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="fk_madetai_id" class="form-control col-md-7 col-xs-12">
                             <?php 
-                              $detai = $this->model->get_all("select * from tbl_detai dt join tbl_user u on u.pk_user_id = dt.fk_user_id  where dt.c_trangthai=2 ".(isset($_GET['fk_mabomon_id'])? " and u.fk_mabomon_id =".$_GET['fk_mabomon_id']:"")." order by pk_madetai_id desc");
+                              $detai = $this->model->get_all("select * from tbl_detai dt join tbl_user u on u.pk_user_id = dt.fk_user_id  where dt.pk_madetai_id not in(select fk_madetai_id from tbl_hoidongnghiemthu) and dt.c_trangthai= 2 ".(isset($_GET['fk_mabomon_id'])? " and u.fk_mabomon_id =".$_GET['fk_mabomon_id']:"")." order by pk_madetai_id desc");
                               foreach($detai as $rows):
                              ?>
                             <option <?php if(isset($record->fk_madetai_id)&&$record->fk_madetai_id==$rows->pk_madetai_id): ?> selected <?php endif; ?> value="<?php echo $rows->pk_madetai_id; ?>"><?php echo $rows->c_tendetai; ?></option>
