@@ -53,7 +53,7 @@
                     <td class="a-center ">
                       <input type="checkbox" class="flat" name="table_records">
                     </td>
-                    <td class=" "><?php echo $rows->c_tendetai; ?></td>
+                    <td class=" "><?php echo ucfirst($rows->c_tendetai); ?></td>
                      <td class=" ">
                       <?=$rows->c_tenbomon?>
                     </td>

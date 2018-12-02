@@ -6,7 +6,7 @@
 			//---------
 			//phan trang
 			//quy dinh so ban ghi hien thi tren mot trang
-			$record_per_page = 15;
+			$record_per_page = 7;
 			$pk_user_id = $_SESSION["SS_USER"]->pk_user_id;
 			//tinh tong so ban ghi
 			$total = $this->model->num_rows("select * from tbl_detai dt join tbl_user u on dt.fk_user_id = u.pk_user_id join tbl_bomon bm on bm.pk_mabomon_id = u.fk_mabomon_id where dt.c_trangthai < 3 and (dt.	fk_user_id=$pk_user_id OR dt.pk_madetai_id in(select fk_madetai_id from tbl_detai_user du where du.fk_user_id=$pk_user_id))");

@@ -71,7 +71,7 @@
                     <td class="a-center ">
                       <input type="checkbox" class="flat" name="table_records">
                     </td>
-                    <td class=" "style="width: 120px;"><?php echo $rows->c_tendetai; ?></td>
+                    <td class=" "style="width: 120px;"><?php echo ucfirst($rows->c_tendetai); ?></td>
                     <td class=" ">
                       <?php 
                         $bomon = $this->model->get_a_record("select c_tenbomon from tbl_bomon where pk_mabomon_id={$rows->fk_mabomon_id}");
