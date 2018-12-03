@@ -26,9 +26,9 @@
 			// $form_action = "admin.php?controller=phieuchamdetai&act=xem&id=$id";
 
 			//tinh tong so ban ghi
-			$total = $this->model->num_rows("SELECT dt.c_tendetai,u.c_fullname,bm.c_tenbomon,dtpc.diem_trung_binh,dtpc.xep_loai from tbl_detai_phieucham dtpc JOIN tbl_detai dt ON dt.pk_madetai_id = dtpc.fk_madetai_id JOIN tbl_user u ON u.pk_user_id = dt.fk_user_id JOIN tbl_bomon bm ON bm.pk_mabomon_id = u.fk_mabomon_id where 1=1 ".(isset($_GET['yearFil'])&&$_GET['yearFil']>0?" and year(dtpc.ngay_hop) =".$_GET['yearFil']:"").(isset($_GET['fk_mabomon_id'])&&$_GET['fk_mabomon_id']>0?" and u.fk_mabomon_id=".$_GET['fk_mabomon_id']:""));
+			$total = $this->model->num_rows("SELECT dt.c_tendetai,u.c_fullname,bm.c_tenbomon,dtpc.diem_trung_binh,dtpc.xep_loai,dt.c_kinhphi from tbl_detai_phieucham dtpc JOIN tbl_detai dt ON dt.pk_madetai_id = dtpc.fk_madetai_id JOIN tbl_user u ON u.pk_user_id = dt.fk_user_id JOIN tbl_bomon bm ON bm.pk_mabomon_id = u.fk_mabomon_id where 1=1 ".(isset($_GET['yearFil'])&&$_GET['yearFil']>0?" and year(dtpc.ngay_hop) =".$_GET['yearFil']:"").(isset($_GET['fk_mabomon_id'])&&$_GET['fk_mabomon_id']>0?" and u.fk_mabomon_id=".$_GET['fk_mabomon_id']:""));
 
-			$export_kq = $this->model->get_all("SELECT dt.c_tendetai,u.c_fullname,bm.c_tenbomon,dtpc.diem_trung_binh,dtpc.xep_loai from tbl_detai_phieucham dtpc JOIN tbl_detai dt ON dt.pk_madetai_id = dtpc.fk_madetai_id JOIN tbl_user u ON u.pk_user_id = dt.fk_user_id JOIN tbl_bomon bm ON bm.pk_mabomon_id = u.fk_mabomon_id where 1=1 ".(isset($_GET['yearFil'])&&$_GET['yearFil']>0?" and year(dtpc.ngay_hop) =".$_GET['yearFil']:"").(isset($_GET['fk_mabomon_id'])&&$_GET['fk_mabomon_id']>0?" and u.fk_mabomon_id=".$_GET['fk_mabomon_id']:""));
+			$export_kq = $this->model->get_all("SELECT dt.c_tendetai,u.c_fullname,bm.c_tenbomon,dtpc.diem_trung_binh,dtpc.xep_loai,dt.c_kinhphi from tbl_detai_phieucham dtpc JOIN tbl_detai dt ON dt.pk_madetai_id = dtpc.fk_madetai_id JOIN tbl_user u ON u.pk_user_id = dt.fk_user_id JOIN tbl_bomon bm ON bm.pk_mabomon_id = u.fk_mabomon_id where 1=1 ".(isset($_GET['yearFil'])&&$_GET['yearFil']>0?" and year(dtpc.ngay_hop) =".$_GET['yearFil']:"").(isset($_GET['fk_mabomon_id'])&&$_GET['fk_mabomon_id']>0?" and u.fk_mabomon_id=".$_GET['fk_mabomon_id']:""));
 
 			$_SESSION['export_kq'] = $export_kq;
 			//tinh so trang
