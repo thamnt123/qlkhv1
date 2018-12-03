@@ -104,10 +104,14 @@
                       </div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >UserType <span class="required">*</span>
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Loại user</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" name="UserType" value="<?php echo isset($record->UserType)?$record->UserType:''; ?>" required class="form-control col-md-7 col-xs-12">
+                          <select name="UserType" class="form-control col-md-7 col-xs-12">
+                            <option value="1" <?php if(isset($record->UserType)&&$record->UserType==1){echo 'selected';} ?>>Giáo viên</option>
+                            <option value="3" <?php if(isset($record->UserType)&&$record->UserType==3){echo 'selected';} ?>>Thư ký hội đồng</option>
+                            <option value="2" <?php if(isset($record->UserType)&&$record->UserType==2){echo 'selected';} ?>>Trưởng bộ môn</option>
+                            <option value="0" <?php if(isset($record->UserType)&&$record->UserType==0){echo 'selected';} ?>>Admin</option>
+                          </select>
                         </div>
                       </div>
 

@@ -25,13 +25,7 @@
             <option value="0">Tất cả</option>
             <?php 
               $selected = isset($year)?$year:date("Y");
-              // if(isset($year)){
-              //   $selected = $year;
-              // }else if(isset($_GET['year'])){
-              //    $selected = $_GET['year'];
-              // }else{
-              //    $selected = date("Y");
-              // }
+           
               $nam = $this->model->get_all("select * from tbl_nam order by pk_nam_id desc");
               foreach($nam as $rows):
              ?>
@@ -47,12 +41,7 @@
           
             <option value="0">Tất cả</option>
              <?php 
-                // $mabomonn = "";
-                // if(isset($_GET['classB'])){
-                //   $mabomonn = $_GET['classB'];
-                // }else{
-                //    $mabomonn = $classB;
-                // }
+                
                 $bomon = $this->model->get_all("select * from tbl_bomon order by pk_mabomon_id desc");
                 foreach($bomon as $rows):
                ?>
@@ -78,7 +67,7 @@
                     </th>
                     <th class="column-title">Tên đề tài </th>
                     <th class="column-title">Bộ môn </th>
-                    <th class="column-title">Chủ nhiệm</br> đề tài </th>
+                    <th class="column-title">Chủ nhiệm</br>đề tài </th>
                     
                     <th class="column-title">Kinh phí </th>
                     <th class="column-title">Từ ngày </th>

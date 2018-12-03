@@ -1,12 +1,12 @@
 <?php 
     include "db_connect.php";
     include "public/backend/Classes/PHPExcel.php";
-    if(isset($_POST['import'])){
+    if(isset($_POST['import'])&& $_POST['import']='import'){
         $file = $_FILES['file']['tmp_name'];
         $objReader = PHPExcel_IOFactory::createReaderForFile($file);
         //lấy tất cả các sheet excel
         $listWorkSheets = $objReader->listWorksheetNames($file);
-
+        $flag = true;
         foreach($listWorkSheets as $c_tenbomon){
             $sql = "select * from tbl_bomon where c_tenbomon = '$c_tenbomon'";
             global $db;
@@ -21,7 +21,7 @@
             $sheetData = $objExcel->getActiveSheet()->toArray('null', true, true, true);
 
             $highestRow = $objExcel->setActiveSheetIndex()->getHighestRow();
-            for($row = 1; $row<=$highestRow; $row++){
+            for($row = 2; $row<=$highestRow; $row++){
                //$myDateTime = DateTime::createFromFormat('Y-m-d', $dateString);
                 $c_fullname = $sheetData[$row]['A'];
                 $c_hocham = $sheetData[$row]['B'];
@@ -38,8 +38,9 @@
                 $mysqli->query($sql);
             }
         }
-        $message = "Thành công";
-    echo "<script type='text/javascript'>alert('$message');</script>";    
+      unset($_POST['import']); 
+      $message = "Thành công";
+      echo "<script type='text/javascript'>alert('$message');window.location.href='admin.php?controller=user';</script>";    
     }
  ?>  
  <!-- page content -->
@@ -125,7 +126,7 @@
                     <th class="column-title">Địa chỉ </th>
                     <th class="column-title">SĐT </th>
                     <th class="column-title">Email </th>
-                    <th class="column-title">UserType </th>
+                    <th class="column-title">Loại user </th>
                     <th class="column-title no-link last" ><span class="nobr">Action</span>
                     </th>
                     <th class="bulk-actions" colspan="7">
@@ -141,7 +142,7 @@
                     </td>
                     <td class=" "><?php echo $rows->pk_user_id; ?></td>
                     <td class=" "><?php echo $rows->c_fullname; ?></td>
-                    <td class=" ">
+                    <td class=" " style="width: 80px;">
                       <?php 
                         $bomon = $this->model->get_a_record("select c_tenbomon from tbl_bomon where pk_mabomon_id={$rows->fk_mabomon_id}");
                         echo isset($bomon->c_tenbomon)?$bomon->c_tenbomon:"";
@@ -158,7 +159,18 @@
                     <td class=" "><?php echo $rows->c_diachi; ?></td>
                     <td class=" "><?php echo $rows->c_sdt; ?></td>
                     <td class=" "><?php echo $rows->c_email; ?></td>
-                    <td class=" "><?php echo $rows->UserType; ?></td>
+                    <td class=" " style="width: 80px;">
+                       <?php 
+                        if($rows->UserType == 0)
+                          echo "Admin";
+                        else if($rows->UserType == 1)
+                          echo "Giáo viên";
+                        else if($rows->UserType == 2)
+                          echo "Trưởng bộ môn";
+                        else if($rows->UserType == 3)
+                          echo "Thư ký hội đồng";
+                      ?>  
+                    </td>
                     <td class=" last">
                     	<a href="admin.php?controller=add_edit_user&act=edit&id=<?php echo $rows->pk_user_id; ?>">Edit</a>&nbsp;&nbsp;
 						          <a onclick="return window.confirm('Are you sure?');" href="admin.php?controller=add_edit_user&act=delete&id=<?php echo $rows->pk_user_id; ?>">Delete</a>
