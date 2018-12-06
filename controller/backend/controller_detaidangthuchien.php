@@ -36,7 +36,7 @@
 			//---------
 			//phan trang
 			//quy dinh so ban ghi hien thi tren mot trang
-			$record_per_page = 5;
+			$record_per_page = 8;
 			//tinh tong so ban ghi
 			$total = $this->model->num_rows("select dt.pk_madetai_id from tbl_user u join tbl_detai dt on u.pk_user_id = dt.fk_user_id where dt.c_trangthai in (2) ".($classB!=0 ? " and u.fk_mabomon_id in($classB) " : ""));
 			//tinh so trang

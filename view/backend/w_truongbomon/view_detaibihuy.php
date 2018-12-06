@@ -20,6 +20,42 @@
     </div>
 
       <div class="clearfix"></div>
+       <form method="post" enctype="multipart/form-data" action="<?php echo $form_action; ?>">
+        <div class="control-label col-md-0 col-sm-1 col-xs-12">Chọn năm:</div>
+        <div class="col-md-3 col-sm-3 col-xs-12" >
+          <select class="form-control" name="nam" id="nam">
+            <option value="0">Tất cả</option>
+            <?php 
+              $selected = isset($year)?$year:date("Y");
+           
+              $nam = $this->model->get_all("select * from tbl_nam order by pk_nam_id desc");
+              foreach($nam as $rows):
+             ?>
+            <option <?php if(isset($rows->c_nam)&&$rows->c_nam==$selected): ?> selected <?php endif; ?> value="<?php echo $rows->c_nam; ?>"><?php echo $rows->c_nam; ?></option>
+            <?php endforeach; ?>
+          
+          </select>
+        </div>
+         <!-- lọc bộ môn -->
+        <div class="control-label col-md-0 col-sm-1 col-xs-12">Bộ môn:</div>
+        <div class="col-md-4 col-sm-4 col-xs-12" >
+          <select class="form-control" name="bomon" id="bomon">
+          
+            <option value="0">Tất cả</option>
+             <?php 
+                
+                $bomon = $this->model->get_all("select * from tbl_bomon order by pk_mabomon_id desc");
+                foreach($bomon as $rows):
+               ?>
+              <option <?php if(isset($rows->pk_mabomon_id)&&$rows->pk_mabomon_id==$classB): ?> selected <?php endif; ?> value="<?php echo $rows->pk_mabomon_id; ?>"><?php echo $rows->c_tenbomon; ?></option>
+              <?php endforeach; ?>
+          </select>
+        </div>
+        <!-- end lọc bộ môn -->
+        <div class="control-label col-md-0 col-sm-1 col-xs-12" >
+          <button type="submit" name="Process" value="Process" class="btn btn-success">Search</button>
+        </div>
+      </form>
 
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -98,8 +134,45 @@
 					<ul class="pagination">
 						<li class="page-item"><a class="page-link" href="#">Trang</a></li>
 					<?php for($i=1; $i<=$num_page; $i++): ?>	
-						<li class="page-item"><a class="page-link" href="truongbomon.php?controller=detaibihuy&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+						<li class="page-item"><a class="page-link" onclick="phanTrang(this)" href="truongbomon.php?controller=detaibihuy&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
 					<?php endfor; ?>
+           <script type="text/javascript">
+            function phanTrang(el){
+              debugger
+              var namm = $("#nam").val();
+              var bomonn = $("#bomon").val();
+              var hdrf = URL_add_parameter($(el).attr('href'),'year',namm);
+              $(el).attr('href',URL_add_parameter(hdrf,'classB',bomonn));
+
+              //alert($('#btn_xemchitiet').attr('href'));
+            }
+            function URL_add_parameter(url, param, value){
+              var hash       = {};
+              var parser     = document.createElement('a');
+
+              parser.href    = url;
+
+              var parameters = parser.search.split(/\?|&/);
+
+              for(var i=0; i < parameters.length; i++) {
+                  if(!parameters[i])
+                      continue;
+
+                  var ary      = parameters[i].split('=');
+                  hash[ary[0]] = ary[1];
+              }
+
+              hash[param] = value;
+
+              var list = [];  
+              Object.keys(hash).forEach(function (key) {
+                  list.push(key + '=' + hash[key]);
+              });
+
+              parser.search = '?' + list.join('&');
+              return parser.href;
+            }
+          </script>
 					</ul>
 				</div>
 			<!-- end phân trang -->

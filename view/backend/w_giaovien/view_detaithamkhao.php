@@ -64,7 +64,7 @@
 
                     </td>
                     <td class=" "><?php echo $rows->c_noidungnghiencuu; ?></td>
-                    <td class=" "><?php echo $rows->c_kinhphi; ?></td>
+                    <td class=" "><?php echo $rows->c_kinhphi; ?> VNĐ</td>
                     <td class=" ">
                       <?php 
               $date = date_create($rows->c_tungay);

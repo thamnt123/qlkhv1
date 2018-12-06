@@ -68,7 +68,7 @@
               </table>
 
             <div>
-				<a href="#" class="btn btn-primary">Delete</a>
+		<!-- 		<a href="#" class="btn btn-primary">Delete</a> -->
 			</div>
               <!-- phân trang -->
 	          	<div class="card-footer" style="padding:5px !important">

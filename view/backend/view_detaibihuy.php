@@ -142,8 +142,45 @@
 					<ul class="pagination">
 						<li class="page-item"><a class="page-link" href="#">Trang</a></li>
 					<?php for($i=1; $i<=$num_page; $i++): ?>	
-						<li class="page-item"><a class="page-link" href="admin.php?controller=detaibihuy&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+						<li class="page-item"><a class="page-link" onclick="phanTrang(this)" href="admin.php?controller=detaibihuy&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
 					<?php endfor; ?>
+           <script type="text/javascript">
+            function phanTrang(el){
+              debugger
+              var namm = $("#nam").val();
+              var bomonn = $("#bomon").val();
+              var hdrf = URL_add_parameter($(el).attr('href'),'year',namm);
+              $(el).attr('href',URL_add_parameter(hdrf,'classB',bomonn));
+
+              //alert($('#btn_xemchitiet').attr('href'));
+            }
+            function URL_add_parameter(url, param, value){
+              var hash       = {};
+              var parser     = document.createElement('a');
+
+              parser.href    = url;
+
+              var parameters = parser.search.split(/\?|&/);
+
+              for(var i=0; i < parameters.length; i++) {
+                  if(!parameters[i])
+                      continue;
+
+                  var ary      = parameters[i].split('=');
+                  hash[ary[0]] = ary[1];
+              }
+
+              hash[param] = value;
+
+              var list = [];  
+              Object.keys(hash).forEach(function (key) {
+                  list.push(key + '=' + hash[key]);
+              });
+
+              parser.search = '?' + list.join('&');
+              return parser.href;
+            }
+          </script>
 					</ul>
 				</div>
 			<!-- end phân trang -->
