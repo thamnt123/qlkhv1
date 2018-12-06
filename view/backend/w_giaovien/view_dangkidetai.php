@@ -30,7 +30,6 @@
                     <th class="column-title">Tên đề tài </th>
                     <th class="column-title">Bộ môn </th>
                     <th class="column-title">Chủ nhiệm đề tài </th>
-                    
                     <th class="column-title">Kinh phí </th>
                     <th class="column-title">Từ ngày </th>
                     <th class="column-title">Đến ngày </th>
@@ -47,7 +46,7 @@
                     <td class="a-center ">
                       <input type="checkbox" class="flat" name="table_records">
                     </td>
-                    <td class=" "><?php echo ucfirst($rows->c_tendetai); ?></td>
+                    <td class=" " style="width: 160px;"><?php echo ucfirst($rows->c_tendetai); ?></td>
                      <td class=" ">
                       <?=$rows->c_tenbomon?>
                     </td>

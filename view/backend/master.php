@@ -13,7 +13,7 @@
 
     <link rel="icon" href="view/backend/images/logotlu.jpg" type="image/ico" />
 
-    <title>Admin Page</title>
+    <title>Quản lý khoa học </title>
     <!-- jQuery -->
     <script src="public/backend/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -42,7 +42,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="admin.php?controller=admin" class="site_title"><img src="view/backend/images/logotlu.jpg" style="width: 40px; border-radius: 50%;"> <span>Welcome Admin</span></a>
+              <a href="admin.php?controller=admin" class="site_title"><img src="view/backend/images/logotlu.jpg" style="width: 40px; border-radius: 50%;"> <span>Quản lý khoa học</span></a>
             </div>
 
             <div class="clearfix"></div>
