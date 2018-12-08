@@ -42,6 +42,9 @@
             <div class="navbar nav_title" style="border: 0;">
               <a href="#" class="site_title"><img src="view/backend/images/logotlu.jpg" style="width: 40px; border-radius: 50%;"> <span>Trưởng bộ môn</span></a>
             </div>
+            <div class="profile_info">
+              <h2> <?=$_SESSION["SS_USER"]->c_fullname ?></h2>
+            </div>
 
             <div class="clearfix"></div>
             <br />
@@ -118,10 +121,13 @@
           <div class="container">
             <?php 
               //kiem tra duong dan cua file controller co ton tai khong, neu ton tai thi load MVC
-              if(file_exists($file_controller))
+              if(file_exists($file_controller)){
                 include $file_controller;
+              }else{
+                include 'view/backend/dashboard.php';
+              }
              ?>
-          </div>
+          </div> 
         <!-- /page content -->
          <footer>
           <div class="pull-right">
