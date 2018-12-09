@@ -52,8 +52,8 @@
                   <tr  class="even pointer">
                     
                     <td class=" "><?=++$index?></td>
-                    <td class=" "><?php echo $rows->c_tenhoidong; ?></td>
-                     <td class=" ">
+                    <td class=" " style="width: 150px;"><?php echo $rows->c_tenhoidong; ?></td>
+                     <td class=" " style="width: 150px;">
                       <?php 
                         $detai = $this->model->get_a_record("select c_tendetai from tbl_detai where pk_madetai_id={$rows->fk_madetai_id}");
                         echo isset($detai->c_tendetai)?$detai->c_tendetai:"";

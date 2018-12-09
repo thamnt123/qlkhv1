@@ -228,15 +228,8 @@
         </div>
       </div>
     </div>
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-  </div>
-</div>
+  
+
 <!-- /page content -->
 <script type="text/javascript">
   function URL_add_parameter(url, param, value){

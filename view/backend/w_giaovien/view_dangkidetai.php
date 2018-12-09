@@ -76,7 +76,7 @@
                         if($rows->c_trangthai == 0)
                           echo "Chờ phê duyệt";
                         else if($rows->c_trangthai == 1)
-                          echo "Chờ hội đồng duyệt";
+                          echo "Chờ phòng QLKH duyệt";
                          else if($rows->c_trangthai == 2)
                           echo "Đang thực hiện";
                          else if($rows->c_trangthai == 3)

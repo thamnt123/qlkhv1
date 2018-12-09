@@ -6,7 +6,7 @@
 			//---------
 			//phan trang
 			//quy dinh so ban ghi hien thi tren mot trang
-			$record_per_page = 5;
+			$record_per_page = 10;
 			//tinh tong so ban ghi
 			$total = $this->model->num_rows("SELECT * from tbl_detai_phieucham dtpc JOIN tbl_detai dt ON dt.pk_madetai_id = dtpc.fk_madetai_id JOIN tbl_user u ON u.pk_user_id = dt.fk_user_id JOIN tbl_bomon bm ON bm.pk_mabomon_id = u.fk_mabomon_id");
 			//tinh so trang

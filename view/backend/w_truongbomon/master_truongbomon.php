@@ -40,7 +40,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="#" class="site_title"><img src="view/backend/images/logotlu.jpg" style="width: 40px; border-radius: 50%;"> <span>Trưởng bộ môn</span></a>
+              <a href="truongbomon.php?controller=truongbomon" class="site_title"><img src="view/backend/images/logotlu.jpg" style="width: 40px; border-radius: 50%;"> <span>Trưởng bộ môn</span></a>
             </div>
             <div class="profile_info">
               <h2> <?=$_SESSION["SS_USER"]->c_fullname ?></h2>

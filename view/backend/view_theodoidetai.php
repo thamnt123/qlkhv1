@@ -109,7 +109,7 @@
                         if($rows->c_trangthai == 0)
                           echo "Chờ trưởng bộ phận duyệt";
                         else if($rows->c_trangthai == 1)
-                          echo "Chờ hội đồng duyệt";
+                          echo "Chờ phòng QLKH duyệt";
                       ?>  
                     </td>
                     

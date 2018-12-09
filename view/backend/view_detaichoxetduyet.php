@@ -106,7 +106,7 @@
                         if($rows->c_trangthai == 0)
                           echo "Chờ trưởng bộ phận duyệt";
                         else if($rows->c_trangthai == 1)
-                          echo "Chờ hội đồng duyệt";
+                          echo "Chờ phòng QLKH duyệt";
                       ?>  
                     </td>
                     
@@ -152,7 +152,7 @@
       </div>
     </div>
   </div>
-</div>
+  
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() { 
   });

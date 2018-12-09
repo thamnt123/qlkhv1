@@ -40,7 +40,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="#" class="site_title"><img src="view/backend/images/logotlu.jpg" style="width: 40px; border-radius: 50%;"> <span>Hội đồng</span></a>
+              <a href="hoidong.php?controller=hoidong" class="site_title"><img src="view/backend/images/logotlu.jpg" style="width: 40px; border-radius: 50%;"> <span>Hội đồng</span></a>
 
             </div>
             <div class="profile_info">

@@ -16,7 +16,7 @@
 			//---------
 			//phan trang
 			//quy dinh so ban ghi hien thi tren mot trang
-			$record_per_page = 5;
+			$record_per_page = 10;
 			//tinh tong so ban ghi
 			$total = $this->model->num_rows("select pk_hoidong_id from tbl_hoidong_detai where fk_hoidongnghiemthu_id = $fk_hoidongnghiemthu_id");
 			//tinh so trang
